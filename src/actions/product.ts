@@ -31,7 +31,7 @@ export function useGetProducts() {
       productsLoading: isLoading,
       productsError: error,
       productsValidating: isValidating,
-      productsEmpty: !isLoading && !isValidating && !data?.products.length,
+      // productsEmpty: !isLoading && !isValidating && !data?.products.length,
     }),
     [data?.products, error, isLoading, isValidating]
   );

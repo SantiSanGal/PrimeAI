@@ -17,10 +17,12 @@ export default defineConfig({
         lintCommand: 'eslint "./src/**/*.{js,jsx,ts,tsx}"',
         dev: { logLevel: ['error'] },
       },
-      overlay: {
-        position: 'tl',
-        initialIsOpen: false,
-      },
+      overlay: false,
+      terminal: true
+      // overlay: {
+      //   position: 'tl',
+      //   initialIsOpen: false,
+      // },
     }),
   ],
   resolve: {

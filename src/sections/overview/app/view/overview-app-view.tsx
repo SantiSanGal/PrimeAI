@@ -51,7 +51,7 @@ export function OverviewAppView() {
 
         <Grid size={{ xs: 12, md: 4 }}>
           <AppWidgetSummary
-            title="Ventas"
+            title="Sales"
             percent={2.6}
             total={18765}
             chart={{
@@ -63,7 +63,7 @@ export function OverviewAppView() {
 
         <Grid size={{ xs: 12, md: 4 }}>
           <AppWidgetSummary
-            title="Clientes Nuevos"
+            title="New Customers"
             percent={0.2}
             total={4876}
             chart={{
@@ -76,7 +76,7 @@ export function OverviewAppView() {
 
         <Grid size={{ xs: 12, md: 4 }}>
           <AppWidgetSummary
-            title="Carritos Abandonados"
+            title="Cart Abandonment Rate"
             percent={-0.1}
             total={678}
             chart={{
@@ -89,66 +89,57 @@ export function OverviewAppView() {
 
         <Grid size={{ xs: 12, md: 6, lg: 4 }}>
           <AppCurrentDownload
-            title="Current download"
-            subheader="Downloaded by operating system"
+            title="Sales by Channel"
+            subheader="Share of sales via WhatsApp, Instagram, Facebook & Telegram"
             chart={{
               series: [
-                { label: 'Mac', value: 12244 },
-                { label: 'Window', value: 53345 },
-                { label: 'iOS', value: 44313 },
-                { label: 'Android', value: 78343 },
+                { label: 'WhatsApp', value: 12244 },
+                { label: 'Instagram', value: 53345 },
+                { label: 'Facebook', value: 44313 },
+                { label: 'Telegram', value: 78343 },
               ],
             }}
           />
         </Grid>
 
-        <Grid size={{ xs: 12, md: 6, lg: 8 }}>
+        <Grid size={{ xs: 12, md: 6, lg: 4 }}>
           <AppAreaInstalled
-            title="Area installed"
-            subheader="(+43%) than last year"
+            title="Sales by Channel"
+            subheader="Monthly totals — +43% YoY"
             chart={{
-              categories: [
-                'Jan',
-                'Feb',
-                'Mar',
-                'Apr',
-                'May',
-                'Jun',
-                'Jul',
-                'Aug',
-                'Sep',
-                'Oct',
-                'Nov',
-                'Dec',
-              ],
+              categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
               series: [
                 {
-                  name: '2022',
+                  name: '2025',
                   data: [
-                    { name: 'Asia', data: [12, 10, 18, 22, 20, 12, 8, 21, 20, 14, 15, 16] },
-                    { name: 'Europe', data: [12, 10, 18, 22, 20, 12, 8, 21, 20, 14, 15, 16] },
-                    { name: 'Americas', data: [12, 10, 18, 22, 20, 12, 8, 21, 20, 14, 15, 16] },
-                  ],
-                },
-                {
-                  name: '2023',
-                  data: [
-                    { name: 'Asia', data: [6, 18, 14, 9, 20, 6, 22, 19, 8, 22, 8, 17] },
-                    { name: 'Europe', data: [6, 18, 14, 9, 20, 6, 22, 19, 8, 22, 8, 17] },
-                    { name: 'Americas', data: [6, 18, 14, 9, 20, 6, 22, 19, 8, 22, 8, 17] },
+                    { name: 'WhatsApp', data: [12, 10, 18, 22, 20, 12, 8, 21, 20, 14, 15, 16] },
+                    { name: 'Instagram', data: [8, 7, 12, 15, 13, 9, 6, 14, 12, 10, 9, 11] },
+                    { name: 'Facebook', data: [5, 6, 7, 8, 6, 5, 4, 7, 6, 5, 6, 6] },
+                    { name: 'Telegram', data: [3, 4, 5, 6, 5, 4, 3, 6, 5, 4, 4, 5] },
                   ],
                 },
                 {
                   name: '2024',
                   data: [
-                    { name: 'Asia', data: [6, 20, 15, 18, 7, 24, 6, 10, 12, 17, 18, 10] },
-                    { name: 'Europe', data: [6, 20, 15, 18, 7, 24, 6, 10, 12, 17, 18, 10] },
-                    { name: 'Americas', data: [6, 20, 15, 18, 7, 24, 6, 10, 12, 17, 18, 10] },
+                    { name: 'WhatsApp', data: [6, 18, 14, 9, 20, 6, 22, 19, 8, 22, 8, 17] },
+                    { name: 'Instagram', data: [4, 10, 9, 8, 12, 7, 11, 10, 6, 12, 6, 9] },
+                    { name: 'Facebook', data: [3, 6, 5, 4, 6, 4, 7, 6, 4, 6, 5, 6] },
+                    { name: 'Telegram', data: [2, 3, 4, 3, 5, 3, 4, 3, 2, 4, 3, 4] },
+                  ],
+                },
+                {
+                  name: '2023',
+                  data: [
+                    { name: 'WhatsApp', data: [6, 20, 15, 18, 7, 24, 6, 10, 12, 17, 18, 10] },
+                    { name: 'Instagram', data: [5, 12, 10, 11, 6, 13, 5, 8, 9, 12, 11, 8] },
+                    { name: 'Facebook', data: [4, 7, 6, 7, 4, 8, 4, 5, 6, 8, 7, 5] },
+                    { name: 'Telegram', data: [2, 4, 3, 4, 3, 5, 2, 3, 3, 4, 4, 3] },
                   ],
                 },
               ],
             }}
           />
+
         </Grid>
 
         <Grid size={{ xs: 12, lg: 8 }}>
