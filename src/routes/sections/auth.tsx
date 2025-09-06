@@ -291,7 +291,7 @@ const auth = {
 
 export const authRoutes: RouteObject[] = [
   {
-    path: 'auth',
+    path: '/',
     element: (
       <Suspense fallback={<SplashScreen />}>
         <Outlet />
