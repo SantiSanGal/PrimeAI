@@ -1,26 +1,18 @@
-import Box from '@mui/material/Box';
-import Grid from '@mui/material/Grid2';
-import Button from '@mui/material/Button';
-import { useTheme } from '@mui/material/styles';
-
-import { DashboardContent } from 'src/layouts/dashboard';
-import { SeoIllustration } from 'src/assets/illustrations';
 import { _appAuthors, _appRelated, _appFeatured, _appInvoices, _appInstalled } from 'src/_mock';
-
+import { AppTopInstalledCountries } from '../app-top-installed-countries';
+import { AppCurrentDownload } from '../app-current-download';
 import { svgColorClasses } from 'src/components/svg-color';
-
-import { useMockedUser } from 'src/auth/hooks';
-
-import { AppWidget } from '../app-widget';
-import { AppWelcome } from '../app-welcome';
-import { AppFeatured } from '../app-featured';
-import { AppNewInvoice } from '../app-new-invoice';
-import { AppTopAuthors } from '../app-top-authors';
-import { AppTopRelated } from '../app-top-related';
+import { DashboardContent } from 'src/layouts/dashboard';
 import { AppAreaInstalled } from '../app-area-installed';
 import { AppWidgetSummary } from '../app-widget-summary';
-import { AppCurrentDownload } from '../app-current-download';
-import { AppTopInstalledCountries } from '../app-top-installed-countries';
+import { AppTopAuthors } from '../app-top-authors';
+import { AppNewInvoice } from '../app-new-invoice';
+import { AppTopRelated } from '../app-top-related';
+import { useTheme } from '@mui/material/styles';
+import { useMockedUser } from 'src/auth/hooks';
+import { AppWidget } from '../app-widget';
+import Grid from '@mui/material/Grid2';
+import Box from '@mui/material/Box';
 
 // ----------------------------------------------------------------------
 
@@ -32,23 +24,6 @@ export function OverviewAppView() {
   return (
     <DashboardContent maxWidth="xl">
       <Grid container spacing={3}>
-        {/* <Grid size={{ xs: 12, md: 8 }}>
-          <AppWelcome
-            title={`Welcome back 👋 \n ${user?.displayName}`}
-            description="If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything."
-            img={<SeoIllustration hideBackground />}
-            action={
-              <Button variant="contained" color="primary">
-                Go now
-              </Button>
-            }
-          />
-        </Grid> */}
-
-        {/* <Grid size={{ xs: 12, md: 4 }}>
-          <AppFeatured list={_appFeatured} />
-        </Grid> */}
-
         <Grid size={{ xs: 12, md: 4 }}>
           <AppWidgetSummary
             title="Sales"

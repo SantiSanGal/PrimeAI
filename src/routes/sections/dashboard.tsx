@@ -1,27 +1,13 @@
-import type { RouteObject } from 'react-router';
-
-import { Outlet } from 'react-router';
-import { lazy, Suspense } from 'react';
-
-import { CONFIG } from 'src/global-config';
-import { DashboardLayout } from 'src/layouts/dashboard';
-
-import { LoadingScreen } from 'src/components/loading-screen';
-
 import { AccountLayout } from 'src/sections/account/account-layout';
-
-import { AuthGuard } from 'src/auth/guard';
-
-// ----------------------------------------------------------------------
+import { LoadingScreen } from 'src/components/loading-screen';
+import { DashboardLayout } from 'src/layouts/dashboard';
+import type { RouteObject } from 'react-router';
+import { lazy, Suspense } from 'react';
+import { Outlet } from 'react-router';
 
 // Overview
 const IndexPage = lazy(() => import('src/pages/dashboard'));
-const OverviewEcommercePage = lazy(() => import('src/pages/dashboard/ecommerce'));
 const OverviewAnalyticsPage = lazy(() => import('src/pages/dashboard/analytics'));
-const OverviewBankingPage = lazy(() => import('src/pages/dashboard/banking'));
-const OverviewBookingPage = lazy(() => import('src/pages/dashboard/booking'));
-const OverviewFilePage = lazy(() => import('src/pages/dashboard/file'));
-const OverviewCoursePage = lazy(() => import('src/pages/dashboard/course'));
 // Product
 const ProductDetailsPage = lazy(() => import('src/pages/dashboard/product/details'));
 const ProductListPage = lazy(() => import('src/pages/dashboard/product/list'));
@@ -51,33 +37,6 @@ const AccountNotificationsPage = lazy(
 const AccountChangePasswordPage = lazy(
   () => import('src/pages/dashboard/user/account/change-password')
 );
-// Blog
-const BlogPostsPage = lazy(() => import('src/pages/dashboard/post/list'));
-const BlogPostPage = lazy(() => import('src/pages/dashboard/post/details'));
-const BlogNewPostPage = lazy(() => import('src/pages/dashboard/post/new'));
-const BlogEditPostPage = lazy(() => import('src/pages/dashboard/post/edit'));
-// Job
-const JobDetailsPage = lazy(() => import('src/pages/dashboard/job/details'));
-const JobListPage = lazy(() => import('src/pages/dashboard/job/list'));
-const JobCreatePage = lazy(() => import('src/pages/dashboard/job/new'));
-const JobEditPage = lazy(() => import('src/pages/dashboard/job/edit'));
-// Tour
-const TourDetailsPage = lazy(() => import('src/pages/dashboard/tour/details'));
-const TourListPage = lazy(() => import('src/pages/dashboard/tour/list'));
-const TourCreatePage = lazy(() => import('src/pages/dashboard/tour/new'));
-const TourEditPage = lazy(() => import('src/pages/dashboard/tour/edit'));
-// File manager
-const FileManagerPage = lazy(() => import('src/pages/dashboard/file-manager'));
-// App
-const ChatPage = lazy(() => import('src/pages/dashboard/chat'));
-const MailPage = lazy(() => import('src/pages/dashboard/mail'));
-const CalendarPage = lazy(() => import('src/pages/dashboard/calendar'));
-const KanbanPage = lazy(() => import('src/pages/dashboard/kanban'));
-// Test render page by role
-const PermissionDeniedPage = lazy(() => import('src/pages/dashboard/permission'));
-// Blank page
-const ParamsPage = lazy(() => import('src/pages/dashboard/params'));
-const BlankPage = lazy(() => import('src/pages/dashboard/blank'));
 
 // ----------------------------------------------------------------------
 
@@ -104,12 +63,7 @@ export const dashboardRoutes: RouteObject[] = [
     element: dashboardLayout(),
     children: [
       { index: true, element: <IndexPage /> },
-      { path: 'ecommerce', element: <OverviewEcommercePage /> },
       { path: 'analytics', element: <OverviewAnalyticsPage /> },
-      { path: 'banking', element: <OverviewBankingPage /> },
-      { path: 'booking', element: <OverviewBookingPage /> },
-      { path: 'file', element: <OverviewFilePage /> },
-      { path: 'course', element: <OverviewCoursePage /> },
       {
         path: 'user',
         children: [
@@ -160,44 +114,6 @@ export const dashboardRoutes: RouteObject[] = [
           { path: 'new', element: <InvoiceCreatePage /> },
         ],
       },
-      {
-        path: 'post',
-        children: [
-          { index: true, element: <BlogPostsPage /> },
-          { path: 'list', element: <BlogPostsPage /> },
-          { path: ':title', element: <BlogPostPage /> },
-          { path: ':title/edit', element: <BlogEditPostPage /> },
-          { path: 'new', element: <BlogNewPostPage /> },
-        ],
-      },
-      {
-        path: 'job',
-        children: [
-          { index: true, element: <JobListPage /> },
-          { path: 'list', element: <JobListPage /> },
-          { path: ':id', element: <JobDetailsPage /> },
-          { path: 'new', element: <JobCreatePage /> },
-          { path: ':id/edit', element: <JobEditPage /> },
-        ],
-      },
-      {
-        path: 'tour',
-        children: [
-          { index: true, element: <TourListPage /> },
-          { path: 'list', element: <TourListPage /> },
-          { path: ':id', element: <TourDetailsPage /> },
-          { path: 'new', element: <TourCreatePage /> },
-          { path: ':id/edit', element: <TourEditPage /> },
-        ],
-      },
-      { path: 'file-manager', element: <FileManagerPage /> },
-      { path: 'mail', element: <MailPage /> },
-      { path: 'chat', element: <ChatPage /> },
-      { path: 'calendar', element: <CalendarPage /> },
-      { path: 'kanban', element: <KanbanPage /> },
-      { path: 'permission', element: <PermissionDeniedPage /> },
-      { path: 'params', element: <ParamsPage /> },
-      { path: 'blank', element: <BlankPage /> },
     ],
   },
 ];
