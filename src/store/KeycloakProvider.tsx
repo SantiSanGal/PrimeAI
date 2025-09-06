@@ -22,7 +22,20 @@ const keycloakConfig: KeycloakConfig = {
     clientId: 'primeai-front',
 };
 
-const kcSingleton = new Keycloak(keycloakConfig);
+// --- Singleton + initPromise para tolerar StrictMode/HMR ---
+const getKc = () => {
+    const g = globalThis as any;
+    if (!g.__kcInstance) g.__kcInstance = new Keycloak(keycloakConfig);
+    return g.__kcInstance as Keycloak;
+};
+const getInitPromise = () => {
+    const g = globalThis as any;
+    return g.__kcInitPromise as Promise<boolean> | undefined;
+};
+const setInitPromise = (p: Promise<boolean>) => {
+    const g = globalThis as any;
+    g.__kcInitPromise = p;
+};
 
 export const KeycloakProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
     const [keycloak, setKeycloak] = useState<Keycloak | null>(null);
@@ -34,33 +47,42 @@ export const KeycloakProvider: React.FC<{ children: React.ReactNode }> = ({ chil
     useEffect(() => {
         let mounted = true;
 
-        const init = async () => {
+        const run = async () => {
             try {
-                const auth = await kcSingleton.init({
-                    onLoad: 'login-required',
-                    pkceMethod: 'S256',
-                    checkLoginIframe: true,
-                });
+                const kc = getKc();
+
+                // Evita doble init: reutiliza la promesa si ya existe
+                let initP = getInitPromise();
+                if (!initP) {
+                    initP = kc.init({
+                        onLoad: 'login-required', // muestra el formulario si no hay sesión
+                        pkceMethod: 'S256',
+                        checkLoginIframe: false,  // <= reduce problemas de 3rd-party cookies/iframes
+                    });
+                    setInitPromise(initP);
+                }
+
+                const auth = await initP;
 
                 if (!mounted) return;
 
-                setKeycloak(kcSingleton);
-                setAuthenticated(auth);
-                setToken(kcSingleton.token);
+                setKeycloak(kc);
+                setAuthenticated(!!auth);
+                setToken(kc.token ?? undefined);
 
                 if (auth) {
                     try {
-                        const p = await kcSingleton.loadUserProfile();
+                        const p = await kc.loadUserProfile();
                         if (mounted) setProfile(p);
-                    } catch { /* opcional: log */ }
+                    } catch {/* noop */ }
                 }
 
-                kcSingleton.onTokenExpired = async () => {
+                kc.onTokenExpired = async () => {
                     try {
-                        const refreshed = await kcSingleton.updateToken(30);
-                        if (refreshed && mounted) setToken(kcSingleton.token);
+                        const refreshed = await kc.updateToken(30);
+                        if (refreshed && mounted) setToken(kc.token ?? undefined);
                     } catch {
-                        kcSingleton.login();
+                        kc.login();
                     }
                 };
             } catch (e) {
@@ -70,16 +92,15 @@ export const KeycloakProvider: React.FC<{ children: React.ReactNode }> = ({ chil
             }
         };
 
-        init();
+        run();
         return () => { mounted = false; };
     }, []);
 
     useEffect(() => {
         if (!keycloak) return;
-
         attachAuth(
             () => keycloak.token,
-            async () => { await keycloak.updateToken(30); }, // ensureFreshToken
+            async () => { await keycloak.updateToken(30); },
             () => keycloak.login()
         );
     }, [keycloak]);

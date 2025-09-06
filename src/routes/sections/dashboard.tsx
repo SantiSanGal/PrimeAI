@@ -1,6 +1,7 @@
 import { AccountLayout } from 'src/sections/account/account-layout';
 import { LoadingScreen } from 'src/components/loading-screen';
 import { DashboardLayout } from 'src/layouts/dashboard';
+import { RequireAuth } from '../guards/RequireAuth';
 import type { RouteObject } from 'react-router';
 import { lazy, Suspense } from 'react';
 import { Outlet } from 'react-router';
@@ -59,60 +60,64 @@ const accountLayout = () => (
 export const dashboardRoutes: RouteObject[] = [
   {
     path: 'dashboard',
-    // element: CONFIG.auth.skip ? dashboardLayout() : <AuthGuard>{dashboardLayout()}</AuthGuard>,
-    element: dashboardLayout(),
+    element: <RequireAuth />,
     children: [
-      { index: true, element: <IndexPage /> },
-      { path: 'analytics', element: <OverviewAnalyticsPage /> },
       {
-        path: 'user',
+        element: dashboardLayout(),
         children: [
-          { index: true, element: <UserProfilePage /> },
-          { path: 'profile', element: <UserProfilePage /> },
-          { path: 'cards', element: <UserCardsPage /> },
-          { path: 'list', element: <UserListPage /> },
-          { path: 'new', element: <UserCreatePage /> },
-          { path: ':id/edit', element: <UserEditPage /> },
+          { index: true, element: <IndexPage /> },
+          { path: 'analytics', element: <OverviewAnalyticsPage /> },
           {
-            path: 'account',
-            element: accountLayout(),
+            path: 'user',
             children: [
-              { index: true, element: <AccountGeneralPage /> },
-              { path: 'billing', element: <AccountBillingPage /> },
-              { path: 'notifications', element: <AccountNotificationsPage /> },
-              { path: 'socials', element: <AccountSocialsPage /> },
-              { path: 'change-password', element: <AccountChangePasswordPage /> },
+              { index: true, element: <UserProfilePage /> },
+              { path: 'profile', element: <UserProfilePage /> },
+              { path: 'cards', element: <UserCardsPage /> },
+              { path: 'list', element: <UserListPage /> },
+              { path: 'new', element: <UserCreatePage /> },
+              { path: ':id/edit', element: <UserEditPage /> },
+              {
+                path: 'account',
+                element: accountLayout(),
+                children: [
+                  { index: true, element: <AccountGeneralPage /> },
+                  { path: 'billing', element: <AccountBillingPage /> },
+                  { path: 'notifications', element: <AccountNotificationsPage /> },
+                  { path: 'socials', element: <AccountSocialsPage /> },
+                  { path: 'change-password', element: <AccountChangePasswordPage /> },
+                ],
+              },
             ],
           },
-        ],
-      },
-      {
-        path: 'product',
-        children: [
-          { index: true, element: <ProductListPage /> },
-          { path: 'list', element: <ProductListPage /> },
-          { path: ':id', element: <ProductDetailsPage /> },
-          { path: 'new', element: <ProductCreatePage /> },
-          { path: ':id/edit', element: <ProductEditPage /> },
-        ],
-      },
-      {
-        path: 'order',
-        children: [
-          { index: true, element: <OrderListPage /> },
-          { path: 'list', element: <OrderListPage /> },
-          { path: ':id', element: <OrderDetailsPage /> },
-        ],
-      },
-      {
-        path: 'invoice',
-        children: [
-          { index: true, element: <InvoiceListPage /> },
-          { path: 'list', element: <InvoiceListPage /> },
-          { path: ':id', element: <InvoiceDetailsPage /> },
-          { path: ':id/edit', element: <InvoiceEditPage /> },
-          { path: 'new', element: <InvoiceCreatePage /> },
-        ],
+          {
+            path: 'product',
+            children: [
+              { index: true, element: <ProductListPage /> },
+              { path: 'list', element: <ProductListPage /> },
+              { path: ':id', element: <ProductDetailsPage /> },
+              { path: 'new', element: <ProductCreatePage /> },
+              { path: ':id/edit', element: <ProductEditPage /> },
+            ],
+          },
+          {
+            path: 'order',
+            children: [
+              { index: true, element: <OrderListPage /> },
+              { path: 'list', element: <OrderListPage /> },
+              { path: ':id', element: <OrderDetailsPage /> },
+            ],
+          },
+          {
+            path: 'invoice',
+            children: [
+              { index: true, element: <InvoiceListPage /> },
+              { path: 'list', element: <InvoiceListPage /> },
+              { path: ':id', element: <InvoiceDetailsPage /> },
+              { path: ':id/edit', element: <InvoiceEditPage /> },
+              { path: 'new', element: <InvoiceCreatePage /> },
+            ],
+          },
+        ]
       },
     ],
   },

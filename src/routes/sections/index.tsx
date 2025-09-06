@@ -8,7 +8,7 @@ import { lazy } from 'react';
 const Page404 = lazy(() => import('src/pages/error/404'));
 
 export const routesSection: RouteObject[] = [
-  { path: '/', element: <Navigate to="/dashboard" replace /> },  // ✅
+  { path: '/', element: <Navigate to="/dashboard" replace /> },
   // PROTEGIDAS
   {
     element: <RequireAuth />,
