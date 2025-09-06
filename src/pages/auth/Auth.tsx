@@ -34,14 +34,6 @@ const Auth = () => {
         initKeycloak();
     }, [history]);
 
-    if (!keycloak) {
-        return <div>Loading...</div>;
-    }
-
-    if (!authenticated) {
-        return <div>Authenticating...</div>;
-    }
-
     return <Navigate to='/dashboard'></Navigate>
 };
 

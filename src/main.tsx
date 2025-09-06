@@ -5,6 +5,7 @@ import { Outlet, RouterProvider, createBrowserRouter } from 'react-router';
 
 import App from './app';
 import { routesSection } from './routes/sections';
+import { KeycloakProvider } from './store/KeycloakProvider';
 
 // ----------------------------------------------------------------------
 
@@ -23,8 +24,10 @@ const root = createRoot(document.getElementById('root')!);
 
 root.render(
   <StrictMode>
-    <HelmetProvider>
-      <RouterProvider router={router} />
-    </HelmetProvider>
+    <KeycloakProvider>
+      <HelmetProvider>
+        <RouterProvider router={router} />
+      </HelmetProvider>
+    </KeycloakProvider>
   </StrictMode>
 );

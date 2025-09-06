@@ -6,11 +6,13 @@
 {
   "$schema": "https://unpkg.com/knip@5/schema-jsonc.json",
   "paths": {
-    // aliases resolver
-    // https://knip.dev/reference/configuration#paths
-    "src/*": ["./src/*"],
+    "src/*": [
+      "./src/*"
+    ],
   },
-  "project": ["src/**/*.{js,cjs,mjs,jsx,ts,cts,mts,tsx}"],
+  "project": [
+    "src/**/*.{js,cjs,mjs,jsx,ts,cts,mts,tsx}"
+  ],
   "ignoreExportsUsedInFile": true,
   "ignoreDependencies": [
     "@fontsource.+",
