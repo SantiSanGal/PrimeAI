@@ -1,12 +1,13 @@
+import { LoadingScreen } from 'src/components/loading-screen';
 import { useAuth } from 'src/store/KeycloakProvider';
 import { Navigate } from 'react-router';
 
 const Auth = () => {
     const { authenticated, initializing } = useAuth();
 
-    if (initializing) return <div>Cargando…</div>;
+    if (initializing) return <LoadingScreen />;
     if (authenticated) return <Navigate to="/dashboard" replace />;
-    return <div>Redirigiendo al inicio de sesión…</div>;
+    return <LoadingScreen />;
 };
 
 export default Auth;

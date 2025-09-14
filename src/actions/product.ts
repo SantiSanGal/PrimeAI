@@ -21,7 +21,8 @@ type ProductsData = {
 };
 
 export function useGetProducts() {
-  const url = endpoints.product.list;
+  // const url = endpoints.product.list;
+  const url = '/v1/items';
 
   const { data, isLoading, error, isValidating } = useSWR<ProductsData>(url, fetcher, swrOptions);
 

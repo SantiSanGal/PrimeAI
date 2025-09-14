@@ -51,6 +51,7 @@ import {
   RenderCellProduct,
   RenderCellCreatedAt,
 } from '../product-table-row';
+import { useItems } from 'src/hooks/useItems';
 
 // ----------------------------------------------------------------------
 
@@ -69,6 +70,7 @@ export function ProductListView() {
   const confirmDialog = useBoolean();
 
   const { products, productsLoading } = useGetProducts();
+  // const { data: products, isloading: productsLoading } = useItems();
 
   const [tableData, setTableData] = useState<IProductItem[]>(products);
   const [selectedRowIds, setSelectedRowIds] = useState<GridRowSelectionModel>([]);

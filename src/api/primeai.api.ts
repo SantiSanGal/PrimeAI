@@ -1,5 +1,6 @@
-// import axios, { AxiosRequestConfig, InternalAxiosRequestConfig } from 'axios';
 import axios, { InternalAxiosRequestConfig } from 'axios';
+
+console.log('import.meta.env.VITE_API_URL', import.meta.env.VITE_API_URL)
 
 export const primeaiApi = axios.create({
     baseURL: import.meta.env.VITE_API_URL,
@@ -25,6 +26,7 @@ primeaiApi.interceptors.request.use(async (config: InternalAxiosRequestConfig) =
         try { await ensureFreshToken(); } catch { }
     }
     const token = getToken ? getToken() : undefined;
+    console.log('token', token)
     if (token) {
         config.headers = config.headers ?? {};
         config.headers.Authorization = `Bearer ${token}`;
