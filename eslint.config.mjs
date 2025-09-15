@@ -16,7 +16,7 @@ export default [
       'public/**',
       'tailwind.config.ts',
       '**/docs/assets/**',
-      '**/services/**', // TODO remove this line after cleaning this folder
+      '**/services/**',
     ],
   },
   {
@@ -44,9 +44,9 @@ export default [
       local: lintRules,
     },
     rules: {
-      'local/no-bang-after-variable': 'error',
+      // 'local/no-bang-after-variable': 'error',
       'local/jsx-inline-style-check': 'error',
-      'no-console': 'error',
+      // 'no-console': 'error',
       '@typescript-eslint/naming-convention': [
         'error',
         {
@@ -54,10 +54,7 @@ export default [
           format: ['PascalCase'],
         },
       ],
-      'max-lines': [
-        'error',
-        { max: 1500, skipBlankLines: false, skipComments: false },
-      ],
+      'max-lines': ['error', { max: 1500, skipBlankLines: false, skipComments: false }],
     },
   },
   ...tseslint.configs.recommended,

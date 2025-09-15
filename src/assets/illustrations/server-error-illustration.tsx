@@ -2,18 +2,18 @@ import type { SvgIconProps } from '@mui/material/SvgIcon';
 
 import { memo, forwardRef } from 'react';
 
-import SvgIcon from '@mui/material/SvgIcon';
+// import SvgIcon from '@mui/material/SvgIcon';
 
-import { CONFIG } from 'src/global-config';
+// import { CONFIG } from 'src/global-config';
 
-import { BackgroundShape } from './background-shape';
+// import { BackgroundShape } from './background-shape';
 
 // ----------------------------------------------------------------------
 
 type SvgProps = SvgIconProps & { hideBackground?: boolean };
 
-const ServerErrorIllustration = forwardRef<SVGSVGElement, SvgProps>((props, ref) => {
-  const { hideBackground, sx, ...other } = props;
+const ServerErrorIllustration = forwardRef<SVGSVGElement, SvgProps>(() => {
+  // const { hideBackground, sx } = props;
 
   return (
     <>Error 500</>

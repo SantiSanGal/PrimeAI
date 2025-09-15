@@ -1,10 +1,12 @@
 import type { LinkProps } from '@mui/material/Link';
 
-import { useId, forwardRef } from 'react';
+// import { useId, forwardRef } from 'react';
+import { forwardRef } from 'react';
 import { mergeClasses } from 'minimal-shared/utils';
 
 import Link from '@mui/material/Link';
-import { styled, useTheme } from '@mui/material/styles';
+// import { styled, useTheme } from '@mui/material/styles';
+import { styled } from '@mui/material/styles';
 
 import { RouterLink } from 'src/routes/components';
 
@@ -20,15 +22,9 @@ export type LogoProps = LinkProps & {
 export const Logo = forwardRef<HTMLAnchorElement, LogoProps>((props, ref) => {
   const { className, href = '/', isSingle = true, disabled, sx, ...other } = props;
 
-  const theme = useTheme();
+  // const theme = useTheme();
 
-  const gradientId = useId();
-
-  const TEXT_PRIMARY = theme.vars.palette.text.primary;
-  const PRIMARY_LIGHT = theme.vars.palette.primary.light;
-  const PRIMARY_MAIN = theme.vars.palette.primary.main;
-  const PRIMARY_DARKER = theme.vars.palette.primary.dark;
-
+  // const gradientId = useId();a
   /*
     * OR using local (public folder)
     *
@@ -53,22 +49,10 @@ export const Logo = forwardRef<HTMLAnchorElement, LogoProps>((props, ref) => {
     */
 
   const singleLogo = (
-    <img
-      alt="Single logo"
-      src={`/logo/logo-single.png`}
-      width="100%"
-      height="100%"
-    />
+    <img alt="Single logo" src={`/logo/logo-single.png`} width="100%" height="100%" />
   );
 
-  const fullLogo = (
-    <img
-      alt="Full logo"
-      src={`/logo/logo-full.png`}
-      width="100%"
-      height="100%"
-    />
-  );
+  const fullLogo = <img alt="Full logo" src={`/logo/logo-full.png`} width="100%" height="100%" />;
 
   // const singleLogo = (
   //   <svg

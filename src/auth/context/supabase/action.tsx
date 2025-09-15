@@ -110,7 +110,9 @@ export const signOut = async (): Promise<{
  *************************************** */
 export const resetPassword = async ({
   email,
-}: ResetPasswordParams): Promise<{ data: {}; error: null } | { data: null; error: AuthError }> => {
+}: ResetPasswordParams): Promise<
+  { data: Object; error: null } | { data: null; error: AuthError }
+> => {
   const { data, error } = await supabase.auth.resetPasswordForEmail(email, {
     // redirectTo: `${window.location.origin}${paths.auth.supabase.updatePassword}`,
   });
