@@ -1,27 +1,22 @@
-import type { BoxProps } from '@mui/material/Box';
-import type { CardProps } from '@mui/material/Card';
 import type { ICheckoutCardOption, ICheckoutPaymentOption } from 'src/types/checkout';
-
-import { varAlpha } from 'minimal-shared/utils';
-import { useBoolean } from 'minimal-shared/hooks';
 import { Controller, useFormContext } from 'react-hook-form';
-
-import Box from '@mui/material/Box';
-import Card from '@mui/material/Card';
-import Button from '@mui/material/Button';
-import Dialog from '@mui/material/Dialog';
-import TextField from '@mui/material/TextField';
-import CardHeader from '@mui/material/CardHeader';
-import DialogTitle from '@mui/material/DialogTitle';
+import FormHelperText from '@mui/material/FormHelperText';
 import DialogContent from '@mui/material/DialogContent';
 import DialogActions from '@mui/material/DialogActions';
-import FormHelperText from '@mui/material/FormHelperText';
-
+import type { CardProps } from '@mui/material/Card';
+import DialogTitle from '@mui/material/DialogTitle';
+import type { BoxProps } from '@mui/material/Box';
+import CardHeader from '@mui/material/CardHeader';
+import { useBoolean } from 'minimal-shared/hooks';
 import { Iconify } from 'src/components/iconify';
+import { varAlpha } from 'minimal-shared/utils';
+import TextField from '@mui/material/TextField';
+import Button from '@mui/material/Button';
+import Dialog from '@mui/material/Dialog';
+import Card from '@mui/material/Card';
+import Box from '@mui/material/Box';
 
-import { PaymentNewCardForm } from '../payment/payment-new-card-form';
-
-// ----------------------------------------------------------------------
+// import { PaymentNewCardForm } from '../payment/payment-new-card-form';
 
 type Props = CardProps & {
   name: string;
@@ -81,9 +76,7 @@ export function CheckoutPaymentMethods({ name, options, sx, ...other }: Props) {
       <Dialog fullWidth maxWidth="xs" open={openForm.value} onClose={openForm.onFalse}>
         <DialogTitle> Add new card </DialogTitle>
 
-        <DialogContent sx={{ overflow: 'unset' }}>
-          <PaymentNewCardForm />
-        </DialogContent>
+        <DialogContent sx={{ overflow: 'unset' }}>{/* <PaymentNewCardForm /> */}</DialogContent>
 
         <DialogActions>
           <Button color="inherit" variant="outlined" onClick={openForm.onFalse}>
