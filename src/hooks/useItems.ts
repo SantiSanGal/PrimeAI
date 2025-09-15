@@ -1,9 +1,9 @@
-import { getItems } from "src/core/actions/items";
-import { useQuery } from "@tanstack/react-query";
+import { getItems } from 'src/core/actions/items/items';
+import { useQuery } from '@tanstack/react-query';
 
 export const useItems = async () => {
-    return useQuery({
-        queryKey: ['items'],
-        queryFn: () => getItems(),
-    });
-}
+  return useQuery({
+    queryKey: ['items'],
+    queryFn: () => getItems(),
+  });
+};
