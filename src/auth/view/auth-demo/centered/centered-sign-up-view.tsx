@@ -1,16 +1,17 @@
+// TODO: Borrar
 import { z as zod } from 'zod';
 import { useForm } from 'react-hook-form';
 import { useBoolean } from 'minimal-shared/hooks';
 import { zodResolver } from '@hookform/resolvers/zod';
 
 import Box from '@mui/material/Box';
-import Link from '@mui/material/Link';
+// import Link from '@mui/material/Link';
 import IconButton from '@mui/material/IconButton';
 import LoadingButton from '@mui/lab/LoadingButton';
 import InputAdornment from '@mui/material/InputAdornment';
 
-import { paths } from 'src/routes/paths';
-import { RouterLink } from 'src/routes/components';
+// import { paths } from 'src/routes/paths';
+// import { RouterLink } from 'src/routes/components';
 
 import { Iconify } from 'src/components/iconify';
 import { Form, Field } from 'src/components/hook-form';
@@ -140,9 +141,9 @@ export function CenteredSignUpView() {
         description={
           <>
             {`Already have an account? `}
-            <Link component={RouterLink} href={paths.authDemo.centered.signIn} variant="subtitle2">
+            {/* <Link component={RouterLink} href={paths.authDemo.centered.signIn} variant="subtitle2">
               Get started
-            </Link>
+            </Link> */}
           </>
         }
       />

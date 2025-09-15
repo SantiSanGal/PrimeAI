@@ -1,11 +1,13 @@
+// TODO: Borrar
 import { z as zod } from 'zod';
+
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 
 import Box from '@mui/material/Box';
 import LoadingButton from '@mui/lab/LoadingButton';
 
-import { paths } from 'src/routes/paths';
+// import { paths } from 'src/routes/paths';
 import { useRouter } from 'src/routes/hooks';
 
 import { PasswordIcon } from 'src/assets/icons';
@@ -14,9 +16,7 @@ import { Form, Field } from 'src/components/hook-form';
 
 import { FormHead } from '../../components/form-head';
 import { resetPassword } from '../../context/supabase';
-import { FormReturnLink } from '../../components/form-return-link';
-
-// ----------------------------------------------------------------------
+// import { FormReturnLink } from '../../components/form-return-link';
 
 export type ResetPasswordSchemaType = zod.infer<typeof ResetPasswordSchema>;
 
@@ -30,7 +30,7 @@ export const ResetPasswordSchema = zod.object({
 // ----------------------------------------------------------------------
 
 export function SupabaseResetPasswordView() {
-  const router = useRouter();
+  // const router = useRouter();
 
   const defaultValues: ResetPasswordSchemaType = {
     email: '',
@@ -50,7 +50,7 @@ export function SupabaseResetPasswordView() {
     try {
       await resetPassword({ email: data.email });
 
-      router.push(paths.auth.supabase.verify);
+      // router.push(paths.auth.supabase.verify);
     } catch (error) {
       console.error(error);
     }
@@ -91,7 +91,7 @@ export function SupabaseResetPasswordView() {
         {renderForm()}
       </Form>
 
-      <FormReturnLink href={paths.auth.supabase.signIn} />
+      {/* <FormReturnLink href={paths.auth.supabase.signIn} /> */}
     </>
   );
 }

@@ -1,3 +1,4 @@
+// TODO: Borrar
 import { z as zod } from 'zod';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
@@ -5,15 +6,15 @@ import { useBoolean } from 'minimal-shared/hooks';
 import { zodResolver } from '@hookform/resolvers/zod';
 
 import Box from '@mui/material/Box';
-import Link from '@mui/material/Link';
+// import Link from '@mui/material/Link';
 import Alert from '@mui/material/Alert';
 import IconButton from '@mui/material/IconButton';
 import LoadingButton from '@mui/lab/LoadingButton';
 import InputAdornment from '@mui/material/InputAdornment';
 
-import { paths } from 'src/routes/paths';
-import { useRouter } from 'src/routes/hooks';
-import { RouterLink } from 'src/routes/components';
+// import { paths } from 'src/routes/paths';
+// import { useRouter } from 'src/routes/hooks';
+// import { RouterLink } from 'src/routes/components';
 
 import { Iconify } from 'src/components/iconify';
 import { Form, Field } from 'src/components/hook-form';
@@ -22,8 +23,6 @@ import { getErrorMessage } from '../../utils';
 import { signUp } from '../../context/supabase';
 import { FormHead } from '../../components/form-head';
 import { SignUpTerms } from '../../components/sign-up-terms';
-
-// ----------------------------------------------------------------------
 
 export type SignUpSchemaType = zod.infer<typeof SignUpSchema>;
 
@@ -43,7 +42,7 @@ export const SignUpSchema = zod.object({
 // ----------------------------------------------------------------------
 
 export function SupabaseSignUpView() {
-  const router = useRouter();
+  // const router = useRouter();
 
   const showPassword = useBoolean();
 
@@ -75,7 +74,7 @@ export function SupabaseSignUpView() {
         lastName: data.lastName,
       });
 
-      router.push(paths.auth.supabase.verify);
+      // router.push(paths.auth.supabase.verify);
     } catch (error) {
       console.error(error);
       const feedbackMessage = getErrorMessage(error);
@@ -142,9 +141,9 @@ export function SupabaseSignUpView() {
         description={
           <>
             {`Already have an account? `}
-            <Link component={RouterLink} href={paths.auth.supabase.signIn} variant="subtitle2">
+            {/* <Link component={RouterLink} href={paths.auth.supabase.signIn} variant="subtitle2">
               Get started
-            </Link>
+            </Link> */}
           </>
         }
         sx={{ textAlign: { xs: 'center', md: 'left' } }}

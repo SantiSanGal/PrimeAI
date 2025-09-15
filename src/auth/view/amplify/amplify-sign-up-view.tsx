@@ -1,3 +1,4 @@
+// TODO: Borrar
 import { z as zod } from 'zod';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
@@ -5,15 +6,15 @@ import { useBoolean } from 'minimal-shared/hooks';
 import { zodResolver } from '@hookform/resolvers/zod';
 
 import Box from '@mui/material/Box';
-import Link from '@mui/material/Link';
+// import Link from '@mui/material/Link';
 import Alert from '@mui/material/Alert';
 import IconButton from '@mui/material/IconButton';
 import LoadingButton from '@mui/lab/LoadingButton';
 import InputAdornment from '@mui/material/InputAdornment';
 
-import { paths } from 'src/routes/paths';
-import { useRouter } from 'src/routes/hooks';
-import { RouterLink } from 'src/routes/components';
+// import { paths } from 'src/routes/paths';
+// import { useRouter } from 'src/routes/hooks';
+// import { RouterLink } from 'src/routes/components';
 
 import { Iconify } from 'src/components/iconify';
 import { Form, Field } from 'src/components/hook-form';
@@ -43,7 +44,7 @@ export const SignUpSchema = zod.object({
 // ----------------------------------------------------------------------
 
 export function AmplifySignUpView() {
-  const router = useRouter();
+  // const router = useRouter();
 
   const showPassword = useBoolean();
 
@@ -66,10 +67,10 @@ export function AmplifySignUpView() {
     formState: { isSubmitting },
   } = methods;
 
-  const createRedirectPath = (query: string) => {
-    const queryString = new URLSearchParams({ email: query }).toString();
-    return `${paths.auth.amplify.verify}?${queryString}`;
-  };
+  // const createRedirectPath = (query: string) => {
+  //   // const queryString = new URLSearchParams({ email: query }).toString();
+  //   // return `${paths.auth.amplify.verify}?${queryString}`;
+  // };
 
   const onSubmit = handleSubmit(async (data) => {
     try {
@@ -80,9 +81,9 @@ export function AmplifySignUpView() {
         lastName: data.lastName,
       });
 
-      const redirectPath = createRedirectPath(data.email);
+      // const redirectPath = createRedirectPath(data.email);
 
-      router.push(redirectPath);
+      // router.push(redirectPath);
     } catch (error) {
       console.error(error);
       const feedbackMessage = getErrorMessage(error);
@@ -149,9 +150,9 @@ export function AmplifySignUpView() {
         description={
           <>
             {`Already have an account? `}
-            <Link component={RouterLink} href={paths.auth.amplify.signIn} variant="subtitle2">
+            {/* <Link component={RouterLink} href={paths.auth.amplify.signIn} variant="subtitle2">
               Get started
-            </Link>
+            </Link> */}
           </>
         }
         sx={{ textAlign: { xs: 'center', md: 'left' } }}

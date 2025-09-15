@@ -1,11 +1,8 @@
-import { paths } from 'src/routes/paths';
-
+// TODO: Borrar
+// import { paths } from 'src/routes/paths';
 import { EmailInboxIcon } from 'src/assets/icons';
-
 import { FormHead } from '../../components/form-head';
-import { FormReturnLink } from '../../components/form-return-link';
-
-// ----------------------------------------------------------------------
+// import { FormReturnLink } from '../../components/form-return-link';
 
 export function FirebaseVerifyView() {
   return (
@@ -16,7 +13,7 @@ export function FirebaseVerifyView() {
         description={`We've emailed a 6-digit confirmation code. \nPlease enter the code in the box below to verify your email.`}
       />
 
-      <FormReturnLink href={paths.auth.firebase.signIn} sx={{ mt: 0 }} />
+      {/* <FormReturnLink href={paths.auth.firebase.signIn} sx={{ mt: 0 }} /> */}
     </>
   );
 }

@@ -1,3 +1,4 @@
+// TODO: Borrar
 import { z as zod } from 'zod';
 import { useForm } from 'react-hook-form';
 import { useBoolean } from 'minimal-shared/hooks';
@@ -8,7 +9,7 @@ import IconButton from '@mui/material/IconButton';
 import LoadingButton from '@mui/lab/LoadingButton';
 import InputAdornment from '@mui/material/InputAdornment';
 
-import { paths } from 'src/routes/paths';
+// import { paths } from 'src/routes/paths';
 
 import { SentIcon } from 'src/assets/icons';
 
@@ -17,7 +18,7 @@ import { Form, Field } from 'src/components/hook-form';
 
 import { FormHead } from '../../../components/form-head';
 import { FormResendCode } from '../../../components/form-resend-code';
-import { FormReturnLink } from '../../../components/form-return-link';
+// import { FormReturnLink } from '../../../components/form-return-link';
 
 // ----------------------------------------------------------------------
 
@@ -149,7 +150,7 @@ export function CenteredUpdatePasswordView() {
 
       <FormResendCode onResendCode={() => {}} value={0} disabled={false} />
 
-      <FormReturnLink href={paths.authDemo.centered.signIn} />
+      {/* <FormReturnLink href={paths.authDemo.centered.signIn} /> */}
     </>
   );
 }

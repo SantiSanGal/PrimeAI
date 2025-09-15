@@ -1,3 +1,4 @@
+// TODO: Borrar
 import { z as zod } from 'zod';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
@@ -11,7 +12,7 @@ import IconButton from '@mui/material/IconButton';
 import LoadingButton from '@mui/lab/LoadingButton';
 import InputAdornment from '@mui/material/InputAdornment';
 
-import { paths } from 'src/routes/paths';
+// import { paths } from 'src/routes/paths';
 import { useRouter } from 'src/routes/hooks';
 import { RouterLink } from 'src/routes/components';
 
@@ -115,7 +116,8 @@ export function FirebaseSignInView() {
       <Box sx={{ gap: 1.5, display: 'flex', flexDirection: 'column' }}>
         <Link
           component={RouterLink}
-          href={paths.auth.firebase.resetPassword}
+          // href={paths.auth.firebase.resetPassword}
+          href={'paths.auth.firebase.resetPassword'}
           variant="body2"
           color="inherit"
           sx={{ alignSelf: 'flex-end' }}
@@ -166,9 +168,9 @@ export function FirebaseSignInView() {
         description={
           <>
             {`Don’t have an account? `}
-            <Link component={RouterLink} href={paths.auth.firebase.signUp} variant="subtitle2">
+            {/* <Link component={RouterLink} href={paths.auth.firebase.signUp} variant="subtitle2">
               Get started
-            </Link>
+            </Link> */}
           </>
         }
         sx={{ textAlign: { xs: 'center', md: 'left' } }}

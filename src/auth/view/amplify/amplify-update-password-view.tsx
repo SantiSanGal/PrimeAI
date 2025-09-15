@@ -1,3 +1,4 @@
+// TODO: Borrar
 import { z as zod } from 'zod';
 import { useCallback } from 'react';
 import { useForm } from 'react-hook-form';
@@ -9,8 +10,9 @@ import IconButton from '@mui/material/IconButton';
 import LoadingButton from '@mui/lab/LoadingButton';
 import InputAdornment from '@mui/material/InputAdornment';
 
-import { paths } from 'src/routes/paths';
-import { useRouter, useSearchParams } from 'src/routes/hooks';
+// import { paths } from 'src/routes/paths';
+// import { useRouter, useSearchParams } from 'src/routes/hooks';
+import { useSearchParams } from 'src/routes/hooks';
 
 import { SentIcon } from 'src/assets/icons';
 
@@ -18,7 +20,7 @@ import { Iconify } from 'src/components/iconify';
 import { Form, Field } from 'src/components/hook-form';
 
 import { FormHead } from '../../components/form-head';
-import { FormReturnLink } from '../../components/form-return-link';
+// import { FormReturnLink } from '../../components/form-return-link';
 import { FormResendCode } from '../../components/form-resend-code';
 import { resetPassword, updatePassword } from '../../context/amplify';
 
@@ -50,7 +52,7 @@ export const UpdatePasswordSchema = zod
 // ----------------------------------------------------------------------
 
 export function AmplifyUpdatePasswordView() {
-  const router = useRouter();
+  // const router = useRouter();
 
   const searchParams = useSearchParams();
 
@@ -88,7 +90,7 @@ export function AmplifyUpdatePasswordView() {
         newPassword: data.password,
       });
 
-      router.push(paths.auth.amplify.signIn);
+      // router.push(paths.auth.amplify.signIn);
     } catch (error) {
       console.error(error);
     }
@@ -187,7 +189,7 @@ export function AmplifyUpdatePasswordView() {
         disabled={countdown.isCounting}
       />
 
-      <FormReturnLink href={paths.auth.amplify.signIn} />
+      {/* <FormReturnLink href={paths.auth.amplify.signIn} /> */}
     </>
   );
 }

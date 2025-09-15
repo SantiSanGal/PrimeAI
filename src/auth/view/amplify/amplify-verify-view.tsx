@@ -1,3 +1,4 @@
+// TODO: Borrar
 import { z as zod } from 'zod';
 import { useCallback } from 'react';
 import { useForm } from 'react-hook-form';
@@ -7,15 +8,16 @@ import { useCountdownSeconds } from 'minimal-shared/hooks';
 import Box from '@mui/material/Box';
 import LoadingButton from '@mui/lab/LoadingButton';
 
-import { paths } from 'src/routes/paths';
-import { useRouter, useSearchParams } from 'src/routes/hooks';
+// import { paths } from 'src/routes/paths';
+// import { useRouter, useSearchParams } from 'src/routes/hooks';
+import { useSearchParams } from 'src/routes/hooks';
 
 import { EmailInboxIcon } from 'src/assets/icons';
 
 import { Form, Field } from 'src/components/hook-form';
 
 import { FormHead } from '../../components/form-head';
-import { FormReturnLink } from '../../components/form-return-link';
+// import { FormReturnLink } from '../../components/form-return-link';
 import { FormResendCode } from '../../components/form-resend-code';
 import { confirmSignUp, resendSignUpCode } from '../../context/amplify';
 
@@ -37,7 +39,7 @@ export const VerifySchema = zod.object({
 // ----------------------------------------------------------------------
 
 export function AmplifyVerifyView() {
-  const router = useRouter();
+  // const router = useRouter();
 
   const searchParams = useSearchParams();
 
@@ -66,7 +68,7 @@ export function AmplifyVerifyView() {
   const onSubmit = handleSubmit(async (data) => {
     try {
       await confirmSignUp({ username: data.email, confirmationCode: data.code });
-      router.push(paths.auth.amplify.signIn);
+      // router.push(paths.auth.amplify.signIn);
     } catch (error) {
       console.error(error);
     }
@@ -128,7 +130,7 @@ export function AmplifyVerifyView() {
         disabled={countdown.isCounting}
       />
 
-      <FormReturnLink href={paths.auth.amplify.signIn} />
+      {/* <FormReturnLink href={paths.auth.amplify.signIn} /> */}
     </>
   );
 }

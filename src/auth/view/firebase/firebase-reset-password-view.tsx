@@ -1,3 +1,4 @@
+// TODO: Borrar
 import { z as zod } from 'zod';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -5,8 +6,8 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import Box from '@mui/material/Box';
 import LoadingButton from '@mui/lab/LoadingButton';
 
-import { paths } from 'src/routes/paths';
-import { useRouter } from 'src/routes/hooks';
+// import { paths } from 'src/routes/paths';
+// import { useRouter } from 'src/routes/hooks';
 
 import { PasswordIcon } from 'src/assets/icons';
 
@@ -14,7 +15,7 @@ import { Form, Field } from 'src/components/hook-form';
 
 import { FormHead } from '../../components/form-head';
 import { sendPasswordResetEmail } from '../../context/firebase';
-import { FormReturnLink } from '../../components/form-return-link';
+// import { FormReturnLink } from '../../components/form-return-link';
 
 // ----------------------------------------------------------------------
 
@@ -30,7 +31,7 @@ export const ResetPasswordSchema = zod.object({
 // ----------------------------------------------------------------------
 
 export function FirebaseResetPasswordView() {
-  const router = useRouter();
+  // const router = useRouter();
 
   const defaultValues: ResetPasswordSchemaType = {
     email: '',
@@ -46,18 +47,18 @@ export function FirebaseResetPasswordView() {
     formState: { isSubmitting },
   } = methods;
 
-  const createRedirectPath = (query: string) => {
-    const queryString = new URLSearchParams({ email: query }).toString();
-    return `${paths.auth.firebase.verify}?${queryString}`;
-  };
+  // const createRedirectPath = (query: string) => {
+  //   // const queryString = new URLSearchParams({ email: query }).toString();
+  //   // return `${paths.auth.firebase.verify}?${queryString}`;
+  // };
 
   const onSubmit = handleSubmit(async (data) => {
     try {
       await sendPasswordResetEmail({ email: data.email });
 
-      const redirectPath = createRedirectPath(data.email);
+      // const redirectPath = createRedirectPath(data.email);
 
-      router.push(redirectPath);
+      // router.push(redirectPath);
     } catch (error) {
       console.error(error);
     }
@@ -98,7 +99,7 @@ export function FirebaseResetPasswordView() {
         {renderForm()}
       </Form>
 
-      <FormReturnLink href={paths.auth.firebase.signIn} />
+      {/* <FormReturnLink href={paths.auth.firebase.signIn} /> */}
     </>
   );
 }

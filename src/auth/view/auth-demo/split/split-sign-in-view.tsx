@@ -1,3 +1,4 @@
+// TODO: Borrar
 import { z as zod } from 'zod';
 import { useForm } from 'react-hook-form';
 import { useBoolean } from 'minimal-shared/hooks';
@@ -9,7 +10,7 @@ import IconButton from '@mui/material/IconButton';
 import LoadingButton from '@mui/lab/LoadingButton';
 import InputAdornment from '@mui/material/InputAdornment';
 
-import { paths } from 'src/routes/paths';
+// import { paths } from 'src/routes/paths';
 import { RouterLink } from 'src/routes/components';
 
 import { Iconify } from 'src/components/iconify';
@@ -82,7 +83,8 @@ export function SplitSignInView() {
       >
         <Link
           component={RouterLink}
-          href={paths.authDemo.split.resetPassword}
+          // href={paths.authDemo.split.resetPassword}
+          href={'paths.authDemo.split.resetPassword'}
           variant="body2"
           color="inherit"
           sx={{ alignSelf: 'flex-end' }}
@@ -133,9 +135,9 @@ export function SplitSignInView() {
         description={
           <>
             {`Don’t have an account? `}
-            <Link component={RouterLink} href={paths.authDemo.split.signUp} variant="subtitle2">
+            {/* <Link component={RouterLink} href={paths.authDemo.split.signUp} variant="subtitle2">
               Get started
-            </Link>
+            </Link> */}
           </>
         }
         sx={{ textAlign: { xs: 'center', md: 'left' } }}

@@ -1,11 +1,8 @@
-import { paths } from 'src/routes/paths';
-
-import { EmailInboxIcon } from 'src/assets/icons';
-
+// TODO: Borrar
+// import { FormReturnLink } from '../../components/form-return-link';
 import { FormHead } from '../../components/form-head';
-import { FormReturnLink } from '../../components/form-return-link';
-
-// ----------------------------------------------------------------------
+import { EmailInboxIcon } from 'src/assets/icons';
+// import { paths } from 'src/routes/paths';
 
 export function SupabaseVerifyView() {
   return (
@@ -16,7 +13,7 @@ export function SupabaseVerifyView() {
         description={`We've emailed a 6-digit confirmation code. \nPlease enter the code in the box below to verify your email.`}
       />
 
-      <FormReturnLink href={paths.auth.supabase.signIn} sx={{ mt: 0 }} />
+      {/* <FormReturnLink href={paths.auth.supabase.signIn} sx={{ mt: 0 }} /> */}
     </>
   );
 }
