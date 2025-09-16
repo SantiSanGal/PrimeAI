@@ -1,10 +1,6 @@
-import { Helmet } from 'react-helmet-async';
-
-import { CONFIG } from 'src/global-config';
-
 import { CalendarView } from 'src/sections/calendar/view';
-
-// ----------------------------------------------------------------------
+import { Helmet } from 'react-helmet-async';
+import { CONFIG } from 'src/global-config';
 
 const metadata = { title: `Calendar | Dashboard - ${CONFIG.appName}` };
 
