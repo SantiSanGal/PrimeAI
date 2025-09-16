@@ -1,26 +1,20 @@
+// TODO: Borrar
+import { PlanFreeIcon, PlanStarterIcon, PlanPremiumIcon } from 'src/assets/icons';
+// import { PaymentCardListDialog } from '../payment/payment-card-list-dialog';
 import type { IPaymentCard, IAddressItem } from 'src/types/common';
-
-import { useState, useCallback } from 'react';
 import { useBoolean } from 'minimal-shared/hooks';
-
-import Box from '@mui/material/Box';
-import Card from '@mui/material/Card';
-import Grid from '@mui/material/Grid2';
+import CardHeader from '@mui/material/CardHeader';
+import { Iconify } from 'src/components/iconify';
+import { AddressListDialog } from '../address';
+import { useState, useCallback } from 'react';
+import Divider from '@mui/material/Divider';
+import { Label } from 'src/components/label';
+import Button from '@mui/material/Button';
 import Paper from '@mui/material/Paper';
 import Stack from '@mui/material/Stack';
-import Button from '@mui/material/Button';
-import Divider from '@mui/material/Divider';
-import CardHeader from '@mui/material/CardHeader';
-
-import { PlanFreeIcon, PlanStarterIcon, PlanPremiumIcon } from 'src/assets/icons';
-
-import { Label } from 'src/components/label';
-import { Iconify } from 'src/components/iconify';
-
-import { AddressListDialog } from '../address';
-import { PaymentCardListDialog } from '../payment/payment-card-list-dialog';
-
-// ----------------------------------------------------------------------
+import Grid from '@mui/material/Grid2';
+import Card from '@mui/material/Card';
+import Box from '@mui/material/Box';
 
 type Props = {
   cardList: IPaymentCard[];
@@ -41,7 +35,7 @@ export function AccountBillingPlan({ cardList, addressBook, plans }: Props) {
   const primaryAddress = addressBook.find((address) => address.primary) || null;
 
   const [selectedPlan, setSelectedPlan] = useState('');
-  const [selectedCard, setSelectedCard] = useState<IPaymentCard | null>(primaryCard);
+  const [selectedCard] = useState<IPaymentCard | null>(primaryCard);
   const [selectedAddress, setSelectedAddress] = useState<IAddressItem | null>(primaryAddress);
 
   const handleSelectPlan = useCallback(
@@ -58,9 +52,9 @@ export function AccountBillingPlan({ cardList, addressBook, plans }: Props) {
     setSelectedAddress(newValue);
   }, []);
 
-  const handleSelectCard = useCallback((newValue: IPaymentCard | null) => {
-    setSelectedCard(newValue);
-  }, []);
+  // const handleSelectCard = useCallback((newValue: IPaymentCard | null) => {
+  //   setSelectedCard(newValue);
+  // }, []);
 
   const renderPlans = () =>
     plans.map((plan) => (
@@ -210,13 +204,13 @@ export function AccountBillingPlan({ cardList, addressBook, plans }: Props) {
         </Box>
       </Card>
 
-      <PaymentCardListDialog
+      {/* <PaymentCardListDialog
         list={cardList}
         open={openCards.value}
         onClose={openCards.onFalse}
         selected={(selectedId: string) => selectedCard?.id === selectedId}
         onSelect={handleSelectCard}
-      />
+      /> */}
 
       <AddressListDialog
         list={addressBook}

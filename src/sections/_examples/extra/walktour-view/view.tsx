@@ -1,38 +1,35 @@
-import Box from '@mui/material/Box';
-import Grid from '@mui/material/Grid2';
-import Stack from '@mui/material/Stack';
-import Paper from '@mui/material/Paper';
-import Button from '@mui/material/Button';
-import Switch from '@mui/material/Switch';
+// TODO: Borrar
+// import { MotivationIllustration } from 'src/assets/illustrations';
+import { Walktour, useWalktour } from 'src/components/walktour';
+import Typography from '@mui/material/Typography';
+import { Iconify } from 'src/components/iconify';
 import { useTheme } from '@mui/material/styles';
 import TextField from '@mui/material/TextField';
-import Typography from '@mui/material/Typography';
-
+import { ComponentLayout } from '../../layout';
 import { useRouter } from 'src/routes/hooks';
-
-import { MotivationIllustration } from 'src/assets/illustrations';
+import Button from '@mui/material/Button';
+import Switch from '@mui/material/Switch';
+import Stack from '@mui/material/Stack';
+import Paper from '@mui/material/Paper';
+import Grid from '@mui/material/Grid2';
+import Box from '@mui/material/Box';
 import {
+  // _ecommerceLatestProducts,
+  // _ecommerceSalesOverview,
+  // _ecommerceBestSalesman,
+  // _ecommerceNewProducts,
   _mock,
-  _ecommerceNewProducts,
-  _ecommerceBestSalesman,
-  _ecommerceSalesOverview,
-  _ecommerceLatestProducts,
 } from 'src/_mock';
 
-import { Iconify } from 'src/components/iconify';
-import { Walktour, useWalktour } from 'src/components/walktour';
-
-import { EcommerceWelcome } from 'src/sections/overview/e-commerce/ecommerce-welcome';
-import { EcommerceNewProducts } from 'src/sections/overview/e-commerce/ecommerce-new-products';
-import { EcommerceYearlySales } from 'src/sections/overview/e-commerce/ecommerce-yearly-sales';
-import { EcommerceBestSalesman } from 'src/sections/overview/e-commerce/ecommerce-best-salesman';
-import { EcommerceSaleByGender } from 'src/sections/overview/e-commerce/ecommerce-sale-by-gender';
-import { EcommerceSalesOverview } from 'src/sections/overview/e-commerce/ecommerce-sales-overview';
-import { EcommerceWidgetSummary } from 'src/sections/overview/e-commerce/ecommerce-widget-summary';
-import { EcommerceLatestProducts } from 'src/sections/overview/e-commerce/ecommerce-latest-products';
-import { EcommerceCurrentBalance } from 'src/sections/overview/e-commerce/ecommerce-current-balance';
-
-import { ComponentLayout } from '../../layout';
+// import { EcommerceWelcome } from 'src/sections/overview/e-commerce/ecommerce-welcome';
+// import { EcommerceNewProducts } from 'src/sections/overview/e-commerce/ecommerce-new-products';
+// import { EcommerceYearlySales } from 'src/sections/overview/e-commerce/ecommerce-yearly-sales';
+// import { EcommerceBestSalesman } from 'src/sections/overview/e-commerce/ecommerce-best-salesman';
+// import { EcommerceSaleByGender } from 'src/sections/overview/e-commerce/ecommerce-sale-by-gender';
+// import { EcommerceSalesOverview } from 'src/sections/overview/e-commerce/ecommerce-sales-overview';
+// import { EcommerceWidgetSummary } from 'src/sections/overview/e-commerce/ecommerce-widget-summary';
+// import { EcommerceLatestProducts } from 'src/sections/overview/e-commerce/ecommerce-latest-products';
+// import { EcommerceCurrentBalance } from 'src/sections/overview/e-commerce/ecommerce-current-balance';
 
 // ----------------------------------------------------------------------
 
@@ -232,7 +229,7 @@ export function WalktourView() {
 
         <Grid container spacing={3}>
           <Grid size={{ xs: 12, md: 8 }}>
-            <EcommerceWelcome
+            {/* <EcommerceWelcome
               id="demo__1"
               title={`Congratulations 🎉  \n Jaydon Frankie`}
               description="Best seller of the month you have done 57.6% more sales today."
@@ -242,15 +239,15 @@ export function WalktourView() {
                   Go now
                 </Button>
               }
-            />
+            /> */}
           </Grid>
 
           <Grid size={{ xs: 12, md: 4 }}>
-            <EcommerceNewProducts id="demo__2" list={_ecommerceNewProducts} />
+            {/* <EcommerceNewProducts id="demo__2" list={_ecommerceNewProducts} /> */}
           </Grid>
 
           <Grid size={{ xs: 12, md: 4 }}>
-            <EcommerceWidgetSummary
+            {/* <EcommerceWidgetSummary
               title="Product sold"
               percent={2.6}
               total={765}
@@ -258,11 +255,11 @@ export function WalktourView() {
                 categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug'],
                 series: [22, 8, 35, 50, 82, 84, 77, 12],
               }}
-            />
+            /> */}
           </Grid>
 
           <Grid size={{ xs: 12, md: 4 }}>
-            <EcommerceWidgetSummary
+            {/* <EcommerceWidgetSummary
               id="demo__3"
               title="Total balance"
               percent={-0.1}
@@ -272,11 +269,11 @@ export function WalktourView() {
                 categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug'],
                 series: [56, 47, 40, 62, 73, 30, 23, 54],
               }}
-            />
+            /> */}
           </Grid>
 
           <Grid size={{ xs: 12, md: 4 }}>
-            <EcommerceWidgetSummary
+            {/* <EcommerceWidgetSummary
               title="Sales profit"
               percent={0.6}
               total={4876}
@@ -285,11 +282,11 @@ export function WalktourView() {
                 categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug'],
                 series: [40, 70, 75, 70, 50, 28, 7, 64],
               }}
-            />
+            /> */}
           </Grid>
 
           <Grid size={{ xs: 12, md: 6, lg: 4 }}>
-            <EcommerceSaleByGender
+            {/* <EcommerceSaleByGender
               title="Sale by gender"
               total={2324}
               chart={{
@@ -299,11 +296,11 @@ export function WalktourView() {
                   { label: 'Kids', value: 75 },
                 ],
               }}
-            />
+            /> */}
           </Grid>
 
           <Grid size={{ xs: 12, md: 6, lg: 8 }}>
-            <EcommerceYearlySales
+            {/* <EcommerceYearlySales
               id="demo__4"
               title="Yearly sales"
               subheader="(+43%) than last year"
@@ -351,25 +348,25 @@ export function WalktourView() {
                   },
                 ],
               }}
-            />
+            /> */}
           </Grid>
 
           <Grid size={{ xs: 12, md: 6, lg: 8 }}>
-            <EcommerceSalesOverview title="Sales overview" data={_ecommerceSalesOverview} />
+            {/* <EcommerceSalesOverview title="Sales overview" data={_ecommerceSalesOverview} /> */}
           </Grid>
 
           <Grid size={{ xs: 12, md: 6, lg: 4 }}>
-            <EcommerceCurrentBalance
+            {/* <EcommerceCurrentBalance
               title="Current balance"
               earning={25500}
               refunded={1600}
               orderTotal={287650}
               currentBalance={187650}
-            />
+            /> */}
           </Grid>
 
           <Grid size={{ xs: 12, md: 6, lg: 8 }}>
-            <EcommerceBestSalesman
+            {/* <EcommerceBestSalesman
               title="Best salesman"
               tableData={_ecommerceBestSalesman}
               headCells={[
@@ -379,15 +376,15 @@ export function WalktourView() {
                 { id: 'totalAmount', label: 'Total', align: 'right' },
                 { id: 'rank', label: 'Rank', align: 'right' },
               ]}
-            />
+            /> */}
           </Grid>
 
           <Grid size={{ xs: 12, md: 6, lg: 4 }}>
-            <EcommerceLatestProducts
+            {/* <EcommerceLatestProducts
               id="demo__5"
               title="Latest products"
               list={_ecommerceLatestProducts}
-            />
+            /> */}
           </Grid>
         </Grid>
       </ComponentLayout>

@@ -1,34 +1,33 @@
-import type {} from '@mui/lab/themeAugmentation';
-import type {} from '@mui/x-tree-view/themeAugmentation';
-import type {} from '@mui/x-data-grid/themeAugmentation';
-import type {} from '@mui/x-date-pickers/themeAugmentation';
-import type {} from '@mui/material/themeCssVarsAugmentation';
-
-import type { FontStyleExtend } from './core/typography';
-import type { CustomShadows } from './core/custom-shadows';
-import type { ChipExtendVariant } from './core/components/chip';
+import type { PaginationExtendColor, PaginationExtendVariant } from './core/components/pagination';
+import type { ButtonGroupExtendVariant } from './core/components/button-group';
+import type { AvatarGroupExtendVariant } from './core/components/avatar';
+import type { FabExtendVariant } from './core/components/button-fab';
+import type { ButtonExtendVariant } from './core/components/button';
 import type { BadgeExtendVariant } from './core/components/badge';
 import type { SliderExtendColor } from './core/components/slider';
-import type { ButtonExtendVariant } from './core/components/button';
-import type { FabExtendVariant } from './core/components/button-fab';
-import type { AvatarGroupExtendVariant } from './core/components/avatar';
-import type { ButtonGroupExtendVariant } from './core/components/button-group';
-import type { PaginationExtendColor, PaginationExtendVariant } from './core/components/pagination';
+import type { ChipExtendVariant } from './core/components/chip';
+import type {} from '@mui/material/themeCssVarsAugmentation';
+import type {} from '@mui/x-date-pickers/themeAugmentation';
+import type { CustomShadows } from './core/custom-shadows';
+import type {} from '@mui/x-tree-view/themeAugmentation';
+import type {} from '@mui/x-data-grid/themeAugmentation';
+import type { FontStyleExtend } from './core/typography';
+import type {} from '@mui/lab/themeAugmentation';
 import type {
-  GreyExtend,
-  TypeTextExtend,
+  TypeBackgroundExtend,
   CommonColorsExtend,
   PaletteColorExtend,
-  TypeBackgroundExtend,
+  TypeTextExtend,
+  GreyExtend,
 } from './core/palette';
 import type {
-  BgBlurMixin,
-  MaxLineMixin,
-  BgGradientMixin,
-  PaperStylesMixin,
-  TextGradientMixin,
-  MenuItemStylesMixin,
   BorderGradientProps,
+  MenuItemStylesMixin,
+  TextGradientMixin,
+  PaperStylesMixin,
+  BgGradientMixin,
+  MaxLineMixin,
+  BgBlurMixin,
 } from './core/mixins';
 
 // ----------------------------------------------------------------------

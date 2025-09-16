@@ -1,23 +1,18 @@
-import type { CardProps } from '@mui/material/Card';
-import type { IPaymentCard } from 'src/types/common';
-
-import { useBoolean } from 'minimal-shared/hooks';
-
-import Box from '@mui/material/Box';
-import Card from '@mui/material/Card';
-import Button from '@mui/material/Button';
-import Dialog from '@mui/material/Dialog';
-import CardHeader from '@mui/material/CardHeader';
-import DialogTitle from '@mui/material/DialogTitle';
+// TODO: Borrar
+// import { PaymentNewCardForm } from '../payment/payment-new-card-form';
+// import { PaymentCardItem } from '../payment/payment-card-item';
 import DialogContent from '@mui/material/DialogContent';
 import DialogActions from '@mui/material/DialogActions';
-
+import type { IPaymentCard } from 'src/types/common';
+import type { CardProps } from '@mui/material/Card';
+import DialogTitle from '@mui/material/DialogTitle';
+import { useBoolean } from 'minimal-shared/hooks';
+import CardHeader from '@mui/material/CardHeader';
 import { Iconify } from 'src/components/iconify';
-
-import { PaymentCardItem } from '../payment/payment-card-item';
-import { PaymentNewCardForm } from '../payment/payment-new-card-form';
-
-// ----------------------------------------------------------------------
+import Button from '@mui/material/Button';
+import Dialog from '@mui/material/Dialog';
+import Card from '@mui/material/Card';
+import Box from '@mui/material/Box';
 
 type Props = CardProps & {
   cards: IPaymentCard[];
@@ -52,18 +47,17 @@ export function AccountBillingPayment({ cards, sx, ...other }: Props) {
             gridTemplateColumns: { xs: 'repeat(1, 1fr)', md: 'repeat(2, 1fr)' },
           }}
         >
-          {cards.map((card) => (
+          <></>
+          {/* {cards.map((card) => (
             <PaymentCardItem key={card.id} card={card} />
-          ))}
+          ))} */}
         </Box>
       </Card>
 
       <Dialog fullWidth maxWidth="xs" open={openForm.value} onClose={openForm.onFalse}>
         <DialogTitle> Add new card </DialogTitle>
 
-        <DialogContent sx={{ overflow: 'unset' }}>
-          <PaymentNewCardForm />
-        </DialogContent>
+        <DialogContent sx={{ overflow: 'unset' }}>{/* <PaymentNewCardForm /> */}</DialogContent>
 
         <DialogActions>
           <Button color="inherit" variant="outlined" onClick={openForm.onFalse}>

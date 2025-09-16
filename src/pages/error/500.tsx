@@ -1,10 +1,6 @@
-import { Helmet } from 'react-helmet-async';
-
-import { CONFIG } from 'src/global-config';
-
 import { View500 } from 'src/sections/error';
-
-// ----------------------------------------------------------------------
+import { Helmet } from 'react-helmet-async';
+import { CONFIG } from 'src/global-config';
 
 const metadata = { title: `500 Internal server error! | Error - ${CONFIG.appName}` };
 

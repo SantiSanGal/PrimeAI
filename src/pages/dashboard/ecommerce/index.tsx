@@ -1,10 +1,7 @@
+// TODO: Borrar
+// import { OverviewEcommerceView } from 'src/sections/overview/e-commerce/view';
 import { Helmet } from 'react-helmet-async';
-
 import { CONFIG } from 'src/global-config';
-
-import { OverviewEcommerceView } from 'src/sections/overview/e-commerce/view';
-
-// ----------------------------------------------------------------------
 
 const metadata = { title: `E-commerce | Dashboard - ${CONFIG.appName}` };
 
@@ -15,7 +12,7 @@ export default function Page() {
         <title> {metadata.title}</title>
       </Helmet>
 
-      <OverviewEcommerceView />
+      {/* <OverviewEcommerceView /> */}
     </>
   );
 }
