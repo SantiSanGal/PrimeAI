@@ -1,10 +1,6 @@
-import { Helmet } from 'react-helmet-async';
-
-import { CONFIG } from 'src/global-config';
-
 import { MaintenanceView } from 'src/sections/maintenance/view';
-
-// ----------------------------------------------------------------------
+import { Helmet } from 'react-helmet-async';
+import { CONFIG } from 'src/global-config';
 
 const metadata = { title: `Maintenance - ${CONFIG.appName}` };
 

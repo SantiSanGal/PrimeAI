@@ -19,49 +19,45 @@ export default [
       '**/services/**',
     ],
   },
+  ...tseslint.configs.recommended,
+  {
+    rules: {
+      '@typescript-eslint/no-empty-object-type': [
+        'error',
+        {
+          allowInterfaces: 'with-single-extends',
+        },
+      ],
+    },
+  },
+
   {
     files: ['**/*.{js,jsx,mjs,cjs,ts,tsx}'],
     plugins: {
       react,
       'react-hooks': reactHooks,
       'react-refresh': reactRefresh,
+      local: lintRules,
     },
     languageOptions: {
       ...react.configs.recommended.languageOptions,
-      globals: {
-        ...globals.browser,
-      },
+      globals: { ...globals.browser },
     },
     rules: {
       'react-hooks/rules-of-hooks': 'error',
       'react-hooks/exhaustive-deps': 'warn',
       'react-refresh/only-export-components': 'warn',
-    },
-  },
-  {
-    languageOptions: { globals: globals.node },
-    plugins: {
-      local: lintRules,
-    },
-    rules: {
-      // 'local/no-bang-after-variable': 'error',
       'local/jsx-inline-style-check': 'error',
-      // 'no-console': 'error',
       '@typescript-eslint/naming-convention': [
         'error',
-        {
-          selector: 'typeLike',
-          format: ['PascalCase'],
-        },
+        { selector: 'typeLike', format: ['PascalCase'] },
       ],
       'max-lines': ['error', { max: 1500, skipBlankLines: false, skipComments: false }],
     },
   },
-  ...tseslint.configs.recommended,
+
   {
     files: ['scripts/**'],
-    rules: {
-      'no-console': 'off',
-    },
+    rules: { 'no-console': 'off' },
   },
 ];
