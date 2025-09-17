@@ -39,8 +39,6 @@ const AccountChangePasswordPage = lazy(
   () => import('src/pages/dashboard/user/account/change-password')
 );
 
-// ----------------------------------------------------------------------
-
 const dashboardLayout = () => (
   <DashboardLayout>
     <Suspense fallback={<LoadingScreen />}>
@@ -117,7 +115,7 @@ export const dashboardRoutes: RouteObject[] = [
               { path: 'new', element: <InvoiceCreatePage /> },
             ],
           },
-        ]
+        ],
       },
     ],
   },

@@ -1,11 +1,7 @@
 import type { Theme, SxProps } from '@mui/material/styles';
-
-import Portal from '@mui/material/Portal';
-import { styled } from '@mui/material/styles';
-
 import { AnimateLogoZoom } from 'src/components/animate';
-
-// ----------------------------------------------------------------------
+import { styled } from '@mui/material/styles';
+import Portal from '@mui/material/Portal';
 
 export type SplashScreenProps = React.ComponentProps<'div'> & {
   portal?: boolean;
@@ -27,8 +23,6 @@ export function SplashScreen({ portal = true, sx, ...other }: SplashScreenProps)
 
   return content;
 }
-
-// ----------------------------------------------------------------------
 
 const LoadingContent = styled('div')(({ theme }) => ({
   right: 0,

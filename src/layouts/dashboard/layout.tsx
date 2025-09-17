@@ -1,46 +1,36 @@
-import type { Breakpoint } from '@mui/material/styles';
-import type { NavSectionProps } from 'src/components/nav-section';
-
-import { merge } from 'es-toolkit';
-import { useBoolean } from 'minimal-shared/hooks';
-
-import Box from '@mui/material/Box';
-import Alert from '@mui/material/Alert';
-import { useTheme } from '@mui/material/styles';
-import { iconButtonClasses } from '@mui/material/IconButton';
-
-import { allLangs } from 'src/locales';
-import { _contacts, _notifications } from 'src/_mock';
-
-import { Logo } from 'src/components/logo';
-import { useSettingsContext } from 'src/components/settings';
-
-import { NavMobile } from './nav-mobile';
-import { VerticalDivider } from './content';
-import { NavVertical } from './nav-vertical';
-import { layoutClasses } from '../core/classes';
-import { NavHorizontal } from './nav-horizontal';
-import { _account } from '../nav-config-account';
-import { MainSection } from '../core/main-section';
-import { Searchbar } from '../components/searchbar';
-import { _workspaces } from '../nav-config-workspace';
-import { MenuButton } from '../components/menu-button';
-import { HeaderSection } from '../core/header-section';
-import { LayoutSection } from '../core/layout-section';
-import { AccountDrawer } from '../components/account-drawer';
-import { SettingsButton } from '../components/settings-button';
-import { LanguagePopover } from '../components/language-popover';
-import { ContactsPopover } from '../components/contacts-popover';
-import { WorkspacesPopover } from '../components/workspaces-popover';
-import { navData as dashboardNavData } from '../nav-config-dashboard';
-import { dashboardLayoutVars, dashboardNavColorVars } from './css-vars';
 import { NotificationsDrawer } from '../components/notifications-drawer';
-
-import type { MainSectionProps } from '../core/main-section';
+import { dashboardLayoutVars, dashboardNavColorVars } from './css-vars';
+import { navData as dashboardNavData } from '../nav-config-dashboard';
+import type { NavSectionProps } from 'src/components/nav-section';
 import type { HeaderSectionProps } from '../core/header-section';
 import type { LayoutSectionProps } from '../core/layout-section';
-
-// ----------------------------------------------------------------------
+import { LanguagePopover } from '../components/language-popover';
+import { SettingsButton } from '../components/settings-button';
+import type { MainSectionProps } from '../core/main-section';
+import { useSettingsContext } from 'src/components/settings';
+import { iconButtonClasses } from '@mui/material/IconButton';
+import { AccountDrawer } from '../components/account-drawer';
+import type { Breakpoint } from '@mui/material/styles';
+import { LayoutSection } from '../core/layout-section';
+import { MenuButton } from '../components/menu-button';
+import { HeaderSection } from '../core/header-section';
+import { _contacts, _notifications } from 'src/_mock';
+import { _workspaces } from '../nav-config-workspace';
+import { Searchbar } from '../components/searchbar';
+import { MainSection } from '../core/main-section';
+import { useBoolean } from 'minimal-shared/hooks';
+import { NavHorizontal } from './nav-horizontal';
+import { _account } from '../nav-config-account'; // Lista de enlaces en el dropdown del perfil
+import { useTheme } from '@mui/material/styles';
+import { layoutClasses } from '../core/classes';
+import { NavVertical } from './nav-vertical';
+import { VerticalDivider } from './content';
+import { Logo } from 'src/components/logo';
+import { NavMobile } from './nav-mobile';
+import Alert from '@mui/material/Alert';
+import { allLangs } from 'src/locales';
+import Box from '@mui/material/Box';
+import { merge } from 'es-toolkit';
 
 type LayoutBaseProps = Pick<LayoutSectionProps, 'sx' | 'children' | 'cssVars'>;
 
@@ -62,9 +52,8 @@ export function DashboardLayout({
   slotProps,
   layoutQuery = 'lg',
 }: DashboardLayoutProps) {
-  const theme = useTheme();
-
   const settings = useSettingsContext();
+  const theme = useTheme();
 
   const navVars = dashboardNavColorVars(theme, settings.state.navColor, settings.state.navLayout);
 

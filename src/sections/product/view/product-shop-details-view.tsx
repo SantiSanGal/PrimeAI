@@ -21,7 +21,7 @@ import { EmptyContent } from 'src/components/empty-content';
 import { CustomBreadcrumbs } from 'src/components/custom-breadcrumbs';
 
 import { CartIcon } from '../cart-icon';
-import { useCheckoutContext } from '../../checkout/context';
+// import { useCheckoutContext } from '../../checkout/context';
 import { ProductDetailsSkeleton } from '../product-skeleton';
 import { ProductDetailsReview } from '../product-details-review';
 import { ProductDetailsSummary } from '../product-details-summary';
@@ -57,7 +57,7 @@ type Props = {
 };
 
 export function ProductShopDetailsView({ product, error, loading }: Props) {
-  const { state: checkoutState, onAddToCart } = useCheckoutContext();
+  // const { state: checkoutState, onAddToCart } = useCheckoutContext();
 
   const containerStyles: SxProps<Theme> = {
     mt: 5,
@@ -98,7 +98,8 @@ export function ProductShopDetailsView({ product, error, loading }: Props) {
 
   return (
     <Container sx={containerStyles}>
-      <CartIcon totalItems={checkoutState.totalItems} />
+      {/* <CartIcon totalItems={checkoutState.totalItems} /> */}
+      <CartIcon totalItems={10} />
 
       <CustomBreadcrumbs
         links={[
@@ -118,8 +119,8 @@ export function ProductShopDetailsView({ product, error, loading }: Props) {
           {product && (
             <ProductDetailsSummary
               product={product}
-              items={checkoutState.items}
-              onAddToCart={onAddToCart}
+              // items={checkoutState.items}
+              // onAddToCart={onAddToCart}
               disableActions={!product?.available}
             />
           )}

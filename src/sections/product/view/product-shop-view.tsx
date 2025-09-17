@@ -25,7 +25,7 @@ import { CartIcon } from '../cart-icon';
 import { ProductList } from '../product-list';
 import { ProductSort } from '../product-sort';
 import { ProductSearch } from '../product-search';
-import { useCheckoutContext } from '../../checkout/context';
+// import { useCheckoutContext } from '../../checkout/context';
 import { ProductFiltersDrawer } from '../product-filters-drawer';
 import { ProductFiltersResult } from '../product-filters-result';
 
@@ -37,7 +37,7 @@ type Props = {
 };
 
 export function ProductShopView({ products, loading }: Props) {
-  const { state: checkoutState } = useCheckoutContext();
+  // const { state: checkoutState } = useCheckoutContext();
 
   const openFilters = useBoolean();
 
@@ -113,7 +113,7 @@ export function ProductShopView({ products, loading }: Props) {
 
   return (
     <Container sx={{ mb: 15 }}>
-      <CartIcon totalItems={checkoutState.totalItems} />
+      <CartIcon totalItems={10} />
 
       <Typography variant="h4" sx={{ my: { xs: 3, md: 5 } }}>
         Shop

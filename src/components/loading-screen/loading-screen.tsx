@@ -1,10 +1,7 @@
 import type { Theme, SxProps } from '@mui/material/styles';
-
-import Portal from '@mui/material/Portal';
-import { styled } from '@mui/material/styles';
 import LinearProgress from '@mui/material/LinearProgress';
-
-// ----------------------------------------------------------------------
+import { styled } from '@mui/material/styles';
+import Portal from '@mui/material/Portal';
 
 export type LoadingScreenProps = React.ComponentProps<'div'> & {
   portal?: boolean;
@@ -24,8 +21,6 @@ export function LoadingScreen({ portal, sx, ...other }: LoadingScreenProps) {
 
   return content;
 }
-
-// ----------------------------------------------------------------------
 
 const LoadingContent = styled('div')(({ theme }) => ({
   flexGrow: 1,

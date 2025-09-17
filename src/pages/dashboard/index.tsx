@@ -1,10 +1,6 @@
-import { Helmet } from 'react-helmet-async';
-
-import { CONFIG } from 'src/global-config';
-
 import { OverviewAppView } from 'src/sections/overview/app/view';
-
-// ----------------------------------------------------------------------
+import { Helmet } from 'react-helmet-async';
+import { CONFIG } from 'src/global-config';
 
 const metadata = { title: `Dashboard - ${CONFIG.appName}` };
 

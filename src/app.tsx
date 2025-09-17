@@ -1,5 +1,4 @@
 import { SettingsDrawer, defaultSettings, SettingsProvider } from 'src/components/settings';
-import { CheckoutProvider } from 'src/sections/checkout/context';
 import { MotionLazy } from 'src/components/animate/motion-lazy';
 import { ProgressBar } from 'src/components/progress-bar';
 import { I18nProvider } from 'src/locales/i18n-provider';
@@ -27,17 +26,15 @@ export default function App({ children }: AppProps) {
             modeStorageKey={themeConfig.modeStorageKey}
           >
             <MotionLazy>
-              <CheckoutProvider>
-                <Snackbar />
-                <ProgressBar />
-                <SettingsDrawer defaultSettings={defaultSettings} />
-                {children}
-              </CheckoutProvider>
+              <Snackbar />
+              <ProgressBar />
+              <SettingsDrawer defaultSettings={defaultSettings} />
+              {children}
             </MotionLazy>
           </ThemeProvider>
         </LocalizationProvider>
       </SettingsProvider>
-    </I18nProvider >
+    </I18nProvider>
   );
 }
 

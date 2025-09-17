@@ -16,7 +16,7 @@ import { Image } from 'src/components/image';
 import { Iconify } from 'src/components/iconify';
 import { ColorPreview } from 'src/components/color-utils';
 
-import { useCheckoutContext } from '../checkout/context';
+// import { useCheckoutContext } from '../checkout/context';
 
 // ----------------------------------------------------------------------
 
@@ -26,24 +26,34 @@ type Props = {
 };
 
 export function ProductItem({ product, detailsHref }: Props) {
-  const { onAddToCart } = useCheckoutContext();
+  // const { onAddToCart } = useCheckoutContext();
 
-  const { id, name, coverUrl, price, colors, available, sizes, priceSale, newLabel, saleLabel } =
-    product;
+  const {
+    // id,
+    name,
+    coverUrl,
+    price,
+    colors,
+    available,
+    // sizes,
+    priceSale,
+    newLabel,
+    saleLabel,
+  } = product;
 
   const handleAddCart = async () => {
-    const newProduct = {
-      id,
-      name,
-      coverUrl,
-      available,
-      price,
-      colors: [colors[0]],
-      size: sizes[0],
-      quantity: 1,
-    };
+    // const newProduct = {
+    //   id,
+    //   name,
+    //   coverUrl,
+    //   available,
+    //   price,
+    //   colors: [colors[0]],
+    //   size: sizes[0],
+    //   quantity: 1,
+    // };
     try {
-      onAddToCart(newProduct);
+      // onAddToCart(newProduct);
     } catch (error) {
       console.error(error);
     }
