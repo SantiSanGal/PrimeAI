@@ -1,9 +1,10 @@
-import { getItems } from 'src/core/actions/items/items';
+import { ItemsResponse } from '@/core/types/api-response.type';
 import { useQuery } from '@tanstack/react-query';
+import { getItems } from '@/core/actions';
 
-export const useItems = async () => {
-  return useQuery({
+export const useItems = () => {
+  return useQuery<ItemsResponse, Error>({
     queryKey: ['items'],
-    queryFn: () => getItems(),
+    queryFn: getItems,
   });
 };

@@ -69,6 +69,9 @@ const HIDE_COLUMNS_TOGGLABLE = ['category', 'actions'];
 export function ProductListView() {
   const confirmDialog = useBoolean();
 
+  const { data } = useItems();
+  console.log('data', data);
+
   const { products, productsLoading } = useGetProducts();
   // const { data: products, isloading: productsLoading } = useItems();
 
