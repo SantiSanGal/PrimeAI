@@ -1,15 +1,10 @@
-import { useSetState } from 'minimal-shared/hooks';
 import { useMemo, useEffect, useCallback } from 'react';
-
-import axios, { endpoints } from 'src/lib/axios';
-
-import { JWT_STORAGE_KEY } from './constant';
-import { AuthContext } from '../auth-context';
 import { setSession, isValidToken } from './utils';
-
+import { useSetState } from 'minimal-shared/hooks';
+import axios, { endpoints } from 'src/lib/axios';
+import { AuthContext } from '../auth-context';
 import type { AuthState } from '../../types';
-
-// ----------------------------------------------------------------------
+import { JWT_STORAGE_KEY } from './constant';
 
 /**
  * NOTE:
@@ -49,8 +44,6 @@ export function AuthProvider({ children }: Props) {
     checkUserSession();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
-  // ----------------------------------------------------------------------
 
   const checkAuthenticated = state.user ? 'authenticated' : 'unauthenticated';
 

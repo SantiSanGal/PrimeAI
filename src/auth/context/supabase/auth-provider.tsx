@@ -1,14 +1,9 @@
-import { useSetState } from 'minimal-shared/hooks';
 import { useMemo, useEffect, useCallback } from 'react';
-
-import axios from 'src/lib/axios';
-import { supabase } from 'src/lib/supabase';
-
+import { useSetState } from 'minimal-shared/hooks';
 import { AuthContext } from '../auth-context';
-
 import type { AuthState } from '../../types';
-
-// ----------------------------------------------------------------------
+import { supabase } from 'src/lib/supabase';
+import axios from 'src/lib/axios';
 
 /**
  * NOTE:
@@ -55,8 +50,6 @@ export function AuthProvider({ children }: Props) {
     checkUserSession();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
-  // ----------------------------------------------------------------------
 
   const checkAuthenticated = state.user ? 'authenticated' : 'unauthenticated';
 

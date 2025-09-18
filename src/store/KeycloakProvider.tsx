@@ -36,6 +36,7 @@ const setInitPromise = (p: Promise<boolean>) => {
   const g = globalThis as any;
   g.__kcInitPromise = p;
 };
+export const getKcInstance = () => getKc();
 
 export const KeycloakProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [keycloak, setKeycloak] = useState<Keycloak | null>(null);
@@ -102,8 +103,6 @@ export const KeycloakProvider: React.FC<{ children: React.ReactNode }> = ({ chil
 
   useEffect(() => {
     if (!keycloak) return;
-    console.log('keycloak', keycloak);
-    console.log('keycloak.token', keycloak.token);
     if (keycloak.token) localStorage.setItem('token', keycloak.token);
     attachAuth(
       () => keycloak.token,

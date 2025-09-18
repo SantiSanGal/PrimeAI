@@ -8,7 +8,6 @@ import { Outlet } from 'react-router';
 const MaintenancePage = lazy(() => import('src/pages/maintenance'));
 const ProductListPage = lazy(() => import('src/pages/product/list'));
 const ProductDetailsPage = lazy(() => import('src/pages/product/details'));
-const ProductCheckoutPage = lazy(() => import('src/pages/product/checkout'));
 const Page500 = lazy(() => import('src/pages/error/500'));
 const Page403 = lazy(() => import('src/pages/error/403'));
 const Page404 = lazy(() => import('src/pages/error/404'));
@@ -36,7 +35,6 @@ export const mainRoutes: RouteObject[] = [
               { index: true, element: <ProductListPage /> },
               { path: 'list', element: <ProductListPage /> },
               { path: ':id', element: <ProductDetailsPage /> },
-              { path: 'checkout', element: <ProductCheckoutPage /> },
             ],
           },
         ],

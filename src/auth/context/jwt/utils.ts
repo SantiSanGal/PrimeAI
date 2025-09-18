@@ -1,10 +1,6 @@
-// import { paths } from 'src/routes/paths';
-
-import axios from 'src/lib/axios';
-
 import { JWT_STORAGE_KEY } from './constant';
-
-// ----------------------------------------------------------------------
+// import { paths } from 'src/routes/paths';
+import axios from 'src/lib/axios';
 
 export function jwtDecode(token: string) {
   try {

@@ -1,3 +1,5 @@
+import { supabase } from 'src/lib/supabase';
+import { paths } from 'src/routes/paths';
 import type {
   AuthError,
   AuthResponse,
@@ -6,12 +8,6 @@ import type {
   SignInWithPasswordCredentials,
   SignUpWithPasswordCredentials,
 } from '@supabase/supabase-js';
-
-import { paths } from 'src/routes/paths';
-
-import { supabase } from 'src/lib/supabase';
-
-// ----------------------------------------------------------------------
 
 export type SignInParams = {
   email: string;

@@ -1,14 +1,9 @@
-import type { AppState } from '@auth0/auth0-react';
-
-import { useAuth0, Auth0Provider } from '@auth0/auth0-react';
 import { useMemo, useState, useEffect, useCallback } from 'react';
-
-import axios from 'src/lib/axios';
-import { CONFIG } from 'src/global-config';
-
+import { useAuth0, Auth0Provider } from '@auth0/auth0-react';
+import type { AppState } from '@auth0/auth0-react';
 import { AuthContext } from '../auth-context';
-
-// ----------------------------------------------------------------------
+import { CONFIG } from 'src/global-config';
+import axios from 'src/lib/axios';
 
 type Props = {
   children: React.ReactNode;

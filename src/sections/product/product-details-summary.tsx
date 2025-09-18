@@ -1,5 +1,5 @@
 import type { IProductItem } from 'src/types/product';
-import type { CheckoutContextValue } from 'src/types/checkout';
+// import type { CheckoutContextValue } from 'src/types/checkout';
 
 import { useCallback } from 'react';
 import { useForm, Controller } from 'react-hook-form';
@@ -30,14 +30,14 @@ import { NumberInput } from 'src/components/number-input';
 type Props = {
   product: IProductItem;
   disableActions?: boolean;
-  items?: CheckoutContextValue['state']['items'];
-  onAddToCart?: CheckoutContextValue['onAddToCart'];
+  // items?: CheckoutContextValue['state']['items'];
+  // onAddToCart?: CheckoutContextValue['onAddToCart'];
 };
 
 export function ProductDetailsSummary({
-  items,
+  // items,
   product,
-  onAddToCart,
+  // onAddToCart,
   disableActions,
   ...other
 }: Props) {
@@ -60,11 +60,11 @@ export function ProductDetailsSummary({
     subDescription,
   } = product;
 
-  const existProduct = !!items?.length && items.map((item) => item.id).includes(id);
+  // const existProduct = !!items?.length && items.map((item) => item.id).includes(id);
 
-  const isMaxQuantity =
-    !!items?.length &&
-    items.filter((item) => item.id === id).map((item) => item.quantity)[0] >= available;
+  // const isMaxQuantity =
+  //   !!items?.length &&
+  //   items.filter((item) => item.id === id).map((item) => item.quantity)[0] >= available;
 
   const defaultValues = {
     id,
@@ -89,26 +89,26 @@ export function ProductDetailsSummary({
     console.info('DATA', JSON.stringify(data, null, 2));
 
     try {
-      if (!existProduct) {
-        onAddToCart?.({ ...data, colors: [values.colors] });
-      }
+      // if (!existProduct) {
+      //   onAddToCart?.({ ...data, colors: [values.colors] });
+      // }
       router.push(paths.product.checkout);
     } catch (error) {
       console.error(error);
     }
   });
 
-  const handleAddCart = useCallback(() => {
-    try {
-      onAddToCart?.({
-        ...values,
-        colors: [values.colors],
-        subtotal: values.price * values.quantity,
-      });
-    } catch (error) {
-      console.error(error);
-    }
-  }, [onAddToCart, values]);
+  // const handleAddCart = useCallback(() => {
+  //   try {
+  //     // onAddToCart?.({
+  //     //   ...values,
+  //     //   colors: [values.colors],
+  //     //   subtotal: values.price * values.quantity,
+  //     // });
+  //   } catch (error) {
+  //     console.error(error);
+  //   }
+  // }, [onAddToCart, values]);
 
   const renderPrice = () => (
     <Box sx={{ typography: 'h5' }}>
@@ -236,12 +236,12 @@ export function ProductDetailsSummary({
     <Box sx={{ gap: 2, display: 'flex' }}>
       <Button
         fullWidth
-        disabled={isMaxQuantity || disableActions}
+        // disabled={isMaxQuantity || disableActions}
         size="large"
         color="warning"
         variant="contained"
         startIcon={<Iconify icon="solar:cart-plus-bold" width={24} />}
-        onClick={handleAddCart}
+        // onClick={handleAddCart}
         sx={{ whiteSpace: 'nowrap' }}
       >
         Add to cart
