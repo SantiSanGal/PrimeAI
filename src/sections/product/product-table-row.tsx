@@ -1,20 +1,15 @@
-import type { GridCellParams } from '@mui/x-data-grid';
-
-import Box from '@mui/material/Box';
-import Link from '@mui/material/Link';
-import Stack from '@mui/material/Stack';
-import Avatar from '@mui/material/Avatar';
-import ListItemText from '@mui/material/ListItemText';
+// TODO: Editar product list
 import LinearProgress from '@mui/material/LinearProgress';
-
-import { RouterLink } from 'src/routes/components';
-
-import { fCurrency } from 'src/utils/format-number';
+import type { GridCellParams } from '@mui/x-data-grid';
+import ListItemText from '@mui/material/ListItemText';
 import { fTime, fDate } from 'src/utils/format-time';
-
+import { fCurrency } from 'src/utils/format-number';
+import { RouterLink } from 'src/routes/components';
 import { Label } from 'src/components/label';
-
-// ----------------------------------------------------------------------
+import Avatar from '@mui/material/Avatar';
+import Stack from '@mui/material/Stack';
+import Link from '@mui/material/Link';
+import Box from '@mui/material/Box';
 
 type ParamsProps = {
   params: GridCellParams;
