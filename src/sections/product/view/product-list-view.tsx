@@ -1,7 +1,8 @@
-import type { IProductItem, IProductTableFilters } from 'src/types/product';
+// src/sections/product/view/product-list-view.tsx
+import type { IProductTableFilters } from 'src/types/product';
 import { ProductTableFiltersResult } from '../product-table-filters-result';
 import { CustomBreadcrumbs } from 'src/components/custom-breadcrumbs';
-import { useState, useEffect, forwardRef, useCallback } from 'react';
+import { useState, useEffect, forwardRef, useCallback, useMemo } from 'react';
 import { useBoolean, useSetState } from 'minimal-shared/hooks';
 import { ProductTableToolbar } from '../product-table-toolbar';
 import type { UseSetStateReturn } from 'minimal-shared/hooks';
@@ -10,7 +11,6 @@ import { EmptyContent } from 'src/components/empty-content';
 import type { Theme, SxProps } from '@mui/material/styles';
 import { DashboardContent } from 'src/layouts/dashboard';
 import ListItemIcon from '@mui/material/ListItemIcon';
-import { useGetProducts } from 'src/actions/product';
 import { RouterLink } from 'src/routes/components';
 import { PRODUCT_STOCK_OPTIONS } from 'src/_mock';
 import { Iconify } from 'src/components/iconify';
@@ -23,6 +23,7 @@ import Card from '@mui/material/Card';
 import Link from '@mui/material/Link';
 import { columns } from '../columns';
 import Box from '@mui/material/Box';
+
 import type {
   GridColumnVisibilityModel,
   GridActionsCellItemProps,
@@ -39,20 +40,21 @@ import {
   DataGrid,
 } from '@mui/x-data-grid';
 
-const HIDE_COLUMNS = { category: false };
+// 👇 Importa tu adaptador + tipo de fila (ya creados por ti)
+import { mapItemsToRows, type ProductRow } from '../adapter';
 
+const HIDE_COLUMNS = { category: false };
 const HIDE_COLUMNS_TOGGLABLE = ['category', 'actions'];
 
 export function ProductListView() {
-  const { products, productsLoading } = useGetProducts();
+  // ✅ Solo backend
   const { data, isLoading } = useItems();
   const confirmDialog = useBoolean();
 
-  console.log('data', data);
-  console.log('isLoading', isLoading);
+  // Mapeamos la respuesta del backend a filas planas para el DataGrid
+  const rowsFromApi = useMemo(() => mapItemsToRows(data), [data]);
 
-  const [tableData, setTableData] = useState<IProductItem[]>(products);
-
+  const [tableData, setTableData] = useState<ProductRow[]>(rowsFromApi);
   const [selectedRowIds, setSelectedRowIds] = useState<GridRowSelectionModel>([]);
   const [filterButtonEl, setFilterButtonEl] = useState<HTMLButtonElement | null>(null);
 
@@ -62,18 +64,22 @@ export function ProductListView() {
   const [columnVisibilityModel, setColumnVisibilityModel] =
     useState<GridColumnVisibilityModel>(HIDE_COLUMNS);
 
+  // Cuando llega nueva data del backend, refrescamos la tabla
   useEffect(() => {
-    if (products.length) {
-      setTableData(products);
-    }
-  }, [products]);
+    setTableData(rowsFromApi);
+    setSelectedRowIds([]);
+  }, [rowsFromApi]);
 
   const canReset = currentFilters.publish.length > 0 || currentFilters.stock.length > 0;
 
-  const dataFiltered = applyFilter({ inputData: products, filters: currentFilters });
+  // Aplica los filtros del toolbar sobre los datos actuales de la tabla
+  const dataFiltered = applyFilter({ inputData: tableData, filters: currentFilters });
 
   const handleDeleteRows = useCallback(() => {
-    const deleteRows = tableData.filter((row) => !selectedRowIds.includes(row.id));
+    if (!selectedRowIds.length) return;
+
+    const idSet = new Set(selectedRowIds as string[]);
+    const deleteRows = tableData.filter((row) => !idSet.has(row.id));
 
     toast.success('Delete success!');
 
@@ -91,7 +97,7 @@ export function ProductListView() {
         onOpenConfirmDeleteRows={confirmDialog.onTrue}
       />
     ),
-    [currentFilters, selectedRowIds]
+    [currentFilters, selectedRowIds, dataFiltered.length, confirmDialog.onTrue]
   );
 
   const getTogglableColumns = () =>
@@ -154,16 +160,14 @@ export function ProductListView() {
             display: { md: 'flex' },
             height: { xs: 800, md: '1px' },
             flexDirection: { md: 'column' },
-            // backgroundColor: 'red'
           }}
         >
           <DataGrid
             checkboxSelection
             disableRowSelectionOnClick
-            // rows={data?.page.content}
-            // rows={dataFiltered}
-            columns={columns}
-            loading={productsLoading}
+            rows={dataFiltered}                  // ✅ filas desde tu backend + filtros
+            columns={columns}                    // ✅ tus columnas existentes
+            loading={isLoading}                  // ✅ loading real del backend
             getRowHeight={() => 'auto'}
             pageSizeOptions={[5, 10, 20, { value: -1, label: 'All' }]}
             initialState={{ pagination: { paginationModel: { pageSize: 10 } } }}
@@ -293,22 +297,25 @@ export const GridActionsLinkItem = forwardRef<HTMLLIElement, GridActionsLinkItem
 );
 
 // ----------------------------------------------------------------------
+// Ajustamos applyFilter para tu tipo de fila del backend
 
 type ApplyFilterProps = {
-  inputData: IProductItem[];
+  inputData: ProductRow[];
   filters: IProductTableFilters;
 };
 
 function applyFilter({ inputData, filters }: ApplyFilterProps) {
   const { stock, publish } = filters;
 
+  let data = inputData;
+
   if (stock.length) {
-    inputData = inputData.filter((product) => stock.includes(product.inventoryType));
+    data = data.filter((product) => !!product.inventoryType && stock.includes(product.inventoryType));
   }
 
   if (publish.length) {
-    inputData = inputData.filter((product) => publish.includes(product.publish));
+    data = data.filter((product) => !!product.publish && publish.includes(product.publish));
   }
 
-  return inputData;
+  return data;
 }

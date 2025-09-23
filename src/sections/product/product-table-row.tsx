@@ -1,4 +1,3 @@
-// TODO: Editar product list
 import LinearProgress from '@mui/material/LinearProgress';
 import type { GridCellParams } from '@mui/x-data-grid';
 import ListItemText from '@mui/material/ListItemText';
@@ -16,7 +15,7 @@ type ParamsProps = {
 };
 
 export function RenderCellPrice({ params }: ParamsProps) {
-  return fCurrency(params.row.price);
+  return fCurrency(params.row.sellPrice ?? params.row.price ?? 0);
 }
 
 export function RenderCellPublish({ params }: ParamsProps) {
@@ -62,16 +61,10 @@ export function RenderCellStock({ params }: ParamsProps) {
   );
 }
 
+// product-table-row.tsx (o donde tengas estos renderers)
 export function RenderCellProduct({ params, href }: ParamsProps & { href: string }) {
   return (
-    <Box
-      sx={{
-        py: 2,
-        width: 1,
-        display: 'flex',
-        alignItems: 'center',
-      }}
-    >
+    <Box sx={{ py: 2, width: 1, display: 'flex', alignItems: 'center' }}>
       <Avatar
         alt={params.row.name}
         src={params.row.coverUrl}
@@ -82,20 +75,13 @@ export function RenderCellProduct({ params, href }: ParamsProps & { href: string
       <ListItemText
         disableTypography
         primary={
-          <Link
-            component={RouterLink}
-            href={href}
-            noWrap
-            color="inherit"
-            variant="subtitle2"
-            sx={{ cursor: 'pointer' }}
-          >
+          <Link component={RouterLink} href={href} noWrap color="inherit" variant="subtitle2" sx={{ cursor: 'pointer' }}>
             {params.row.name}
           </Link>
         }
         secondary={
           <Box component="div" sx={{ typography: 'body2', color: 'text.disabled' }}>
-            {params.row.category}
+            {params.row.description || params.row.category || '-'}
           </Box>
         }
         sx={{ display: 'flex', flexDirection: 'column' }}
