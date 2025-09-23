@@ -1,4 +1,3 @@
-// src/sections/product/view/product-list-view.tsx
 import type { IProductTableFilters } from 'src/types/product';
 import { ProductTableFiltersResult } from '../product-table-filters-result';
 import { CustomBreadcrumbs } from 'src/components/custom-breadcrumbs';

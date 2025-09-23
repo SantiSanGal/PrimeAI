@@ -61,7 +61,6 @@ export function RenderCellStock({ params }: ParamsProps) {
   );
 }
 
-// product-table-row.tsx (o donde tengas estos renderers)
 export function RenderCellProduct({ params, href }: ParamsProps & { href: string }) {
   return (
     <Box sx={{ py: 2, width: 1, display: 'flex', alignItems: 'center' }}>
@@ -81,7 +80,7 @@ export function RenderCellProduct({ params, href }: ParamsProps & { href: string
         }
         secondary={
           <Box component="div" sx={{ typography: 'body2', color: 'text.disabled' }}>
-            {params.row.description || params.row.category || '-'}
+            {params.row.category || '-'}
           </Box>
         }
         sx={{ display: 'flex', flexDirection: 'column' }}
