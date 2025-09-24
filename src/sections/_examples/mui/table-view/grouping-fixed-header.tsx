@@ -121,7 +121,7 @@ export function GroupingFixedHeaderTable() {
                 <TableCell
                   key={column.id}
                   align={column.align}
-                  style={{ top: 56, minWidth: column.minWidth }}
+                // style={{ top: 56, minWidth: column.minWidth }}
                 >
                   {column.label}
                 </TableCell>

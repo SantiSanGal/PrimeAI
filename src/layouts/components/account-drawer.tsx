@@ -18,7 +18,7 @@ import Avatar from '@mui/material/Avatar';
 import { paths } from 'src/routes/paths';
 import Link from '@mui/material/Link';
 import Box from '@mui/material/Box';
-import { _mock } from 'src/_mock';
+// import { _mock } from 'src/_mock';
 
 export type AccountDrawerProps = IconButtonProps & {
   data?: {
