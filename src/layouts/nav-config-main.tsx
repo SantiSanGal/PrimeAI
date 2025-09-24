@@ -1,18 +1,15 @@
+import type { NavMainProps } from './main/nav/types';
+import { Iconify } from 'src/components/iconify';
+import { CONFIG } from 'src/global-config';
 import { paths } from 'src/routes/paths';
 
-import { CONFIG } from 'src/global-config';
-
-import { Iconify } from 'src/components/iconify';
-
-import type { NavMainProps } from './main/nav/types';
-
-// ----------------------------------------------------------------------
-
+//TODO: Borrar
 export const navData: NavMainProps['data'] = [
   { title: 'Home', path: '/', icon: <Iconify width={22} icon="solar:home-2-bold-duotone" /> },
   {
     title: 'Components',
-    path: paths.components,
+    path: 'asdfasdfasdfasdfasdfasf',
+    // path: paths.components,
     icon: <Iconify width={22} icon="solar:atom-bold-duotone" />,
   },
   {
@@ -23,13 +20,13 @@ export const navData: NavMainProps['data'] = [
       {
         subheader: 'Other',
         items: [
-          { title: 'About us', path: paths.about },
-          { title: 'Contact us', path: paths.contact },
-          { title: 'FAQs', path: paths.faqs },
-          { title: 'Pricing', path: paths.pricing },
-          { title: 'Payment', path: paths.payment },
-          { title: 'Maintenance', path: paths.maintenance },
-          { title: 'Coming soon', path: paths.comingSoon },
+          // { title: 'About us', path: paths.about },
+          // { title: 'Contact us', path: paths.contact },
+          // { title: 'FAQs', path: paths.faqs },
+          // { title: 'Pricing', path: paths.pricing },
+          // { title: 'Payment', path: paths.payment },
+          // { title: 'Maintenance', path: paths.maintenance },
+          // { title: 'Coming soon', path: paths.comingSoon },
         ],
       },
       {
@@ -38,8 +35,8 @@ export const navData: NavMainProps['data'] = [
           { title: 'Shop', path: paths.product.root },
           { title: 'Product', path: paths.product.demo.details },
           { title: 'Checkout', path: paths.product.checkout },
-          { title: 'Posts', path: paths.post.root },
-          { title: 'Post', path: paths.post.demo.details },
+          // { title: 'Posts', path: paths.post.root },
+          // { title: 'Post', path: paths.post.demo.details },
         ],
       },
       // {
@@ -71,6 +68,7 @@ export const navData: NavMainProps['data'] = [
   {
     title: 'Docs',
     icon: <Iconify width={22} icon="solar:notebook-bold-duotone" />,
-    path: paths.docs,
+    // path: paths.docs,
+    path: 'asdfasdfasdfasdfasdfasd',
   },
 ];

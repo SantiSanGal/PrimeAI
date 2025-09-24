@@ -78,7 +78,9 @@ export function TablePaginationWithApi() {
   }, [defaultEndpoint, onResetPage]);
 
   const renderFiltersToolbar = () => (
-    <Box sx={{ px: 3, gap: 1, mb: 3, display: 'flex', alignItems: 'center' }}>
+    <Box
+      sx={{ px: 3, gap: 1, mb: 3, display: 'flex', alignItems: 'center', backgroundColor: 'red' }}
+    >
       <TextField
         fullWidth
         value={searchQuery}

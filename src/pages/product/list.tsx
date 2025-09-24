@@ -1,11 +1,7 @@
-import { Helmet } from 'react-helmet-async';
-
-import { CONFIG } from 'src/global-config';
-import { useGetProducts } from 'src/actions/product';
-
 import { ProductShopView } from 'src/sections/product/view';
-
-// ----------------------------------------------------------------------
+import { useGetProducts } from 'src/actions/product';
+import { Helmet } from 'react-helmet-async';
+import { CONFIG } from 'src/global-config';
 
 const metadata = { title: `Product shop - ${CONFIG.appName}` };
 

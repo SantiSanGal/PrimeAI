@@ -1,35 +1,26 @@
-import type { Breakpoint } from '@mui/material/styles';
-
-import { useBoolean } from 'minimal-shared/hooks';
-
-import Box from '@mui/material/Box';
-import Alert from '@mui/material/Alert';
-import Button from '@mui/material/Button';
-
-import { paths } from 'src/routes/paths';
-import { usePathname } from 'src/routes/hooks';
-
-import { Logo } from 'src/components/logo';
-
-import { NavMobile } from './nav/mobile';
-import { NavDesktop } from './nav/desktop';
-import { Footer, HomeFooter } from './footer';
-import { MainSection } from '../core/main-section';
-import { MenuButton } from '../components/menu-button';
-import { LayoutSection } from '../core/layout-section';
-import { HeaderSection } from '../core/header-section';
-import { navData as mainNavData } from '../nav-config-main';
-import { SignInButton } from '../components/sign-in-button';
-import { SettingsButton } from '../components/settings-button';
-
-import type { FooterProps } from './footer';
-import type { NavMainProps } from './nav/types';
-import type { MainSectionProps } from '../core/main-section';
 import type { HeaderSectionProps } from '../core/header-section';
 import type { LayoutSectionProps } from '../core/layout-section';
+import { SettingsButton } from '../components/settings-button';
+import type { MainSectionProps } from '../core/main-section';
+import { navData as mainNavData } from '../nav-config-main';
+import { SignInButton } from '../components/sign-in-button';
+import { LayoutSection } from '../core/layout-section';
+import { HeaderSection } from '../core/header-section';
+import type { Breakpoint } from '@mui/material/styles';
+import { MenuButton } from '../components/menu-button';
+import { MainSection } from '../core/main-section';
+import { useBoolean } from 'minimal-shared/hooks';
+import type { NavMainProps } from './nav/types';
+import { usePathname } from 'src/routes/hooks';
+import { Footer, HomeFooter } from './footer';
+import type { FooterProps } from './footer';
+import { NavDesktop } from './nav/desktop';
+import { Logo } from 'src/components/logo';
+import { NavMobile } from './nav/mobile';
+import Alert from '@mui/material/Alert';
+import Box from '@mui/material/Box';
 
-// ----------------------------------------------------------------------
-
+// TODO: borrar
 type LayoutBaseProps = Pick<LayoutSectionProps, 'sx' | 'children' | 'cssVars'>;
 
 export type MainLayoutProps = LayoutBaseProps & {
@@ -90,7 +81,11 @@ export function MainLayout({
             data={navData}
             sx={(theme) => ({
               display: 'none',
-              [theme.breakpoints.up(layoutQuery)]: { mr: 2.5, display: 'flex' },
+              [theme.breakpoints.up(layoutQuery)]: {
+                mr: 2.5,
+                display: 'flex',
+                backgroundColor: 'red',
+              },
             })}
           />
 
@@ -100,20 +95,6 @@ export function MainLayout({
 
             {/** @slot Sign in button */}
             <SignInButton />
-
-            {/** @slot Purchase button */}
-            <Button
-              variant="contained"
-              rel="noopener"
-              target="_blank"
-              href={paths.minimalStore}
-              sx={(theme) => ({
-                display: 'none',
-                [theme.breakpoints.up(layoutQuery)]: { display: 'inline-flex' },
-              })}
-            >
-              Purchase
-            </Button>
           </Box>
         </>
       ),

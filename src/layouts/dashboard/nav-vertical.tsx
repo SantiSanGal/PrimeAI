@@ -1,20 +1,14 @@
-import type { NavSectionProps } from 'src/components/nav-section';
 import type { Theme, SxProps, CSSObject, Breakpoint } from '@mui/material/styles';
-
-import { varAlpha, mergeClasses } from 'minimal-shared/utils';
-
-import Box from '@mui/material/Box';
-import { styled } from '@mui/material/styles';
-
-import { Logo } from 'src/components/logo';
-import { Scrollbar } from 'src/components/scrollbar';
 import { NavSectionMini, NavSectionVertical } from 'src/components/nav-section';
-
-import { layoutClasses } from '../core/classes';
-import { NavUpgrade } from '../components/nav-upgrade';
+import type { NavSectionProps } from 'src/components/nav-section';
 import { NavToggleButton } from '../components/nav-toggle-button';
-
-// ----------------------------------------------------------------------
+import { varAlpha, mergeClasses } from 'minimal-shared/utils';
+import { NavUpgrade } from '../components/nav-upgrade';
+import { Scrollbar } from 'src/components/scrollbar';
+import { layoutClasses } from '../core/classes';
+import { styled } from '@mui/material/styles';
+import { Logo } from 'src/components/logo';
+import Box from '@mui/material/Box';
 
 export type NavVerticalProps = React.ComponentProps<'div'> & {
   isNavMini: boolean;

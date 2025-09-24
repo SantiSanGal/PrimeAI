@@ -1,11 +1,7 @@
 import type { IconButtonProps } from '@mui/material/IconButton';
-
-import { varAlpha } from 'minimal-shared/utils';
-
-import SvgIcon from '@mui/material/SvgIcon';
 import IconButton from '@mui/material/IconButton';
-
-// ----------------------------------------------------------------------
+import { varAlpha } from 'minimal-shared/utils';
+import SvgIcon from '@mui/material/SvgIcon';
 
 export type NavToggleButtonProps = IconButtonProps & {
   isNavMini: boolean;

@@ -1,9 +1,9 @@
-import type { IProductTableFilters } from 'src/types/product';
+import { useState, useEffect, forwardRef, useCallback, useMemo } from 'react';
 import { ProductTableFiltersResult } from '../product-table-filters-result';
 import { CustomBreadcrumbs } from 'src/components/custom-breadcrumbs';
-import { useState, useEffect, forwardRef, useCallback, useMemo } from 'react';
 import { useBoolean, useSetState } from 'minimal-shared/hooks';
 import { ProductTableToolbar } from '../product-table-toolbar';
+import type { IProductTableFilters } from 'src/types/product';
 import type { UseSetStateReturn } from 'minimal-shared/hooks';
 import { ConfirmDialog } from 'src/components/custom-dialog';
 import { EmptyContent } from 'src/components/empty-content';
@@ -22,13 +22,6 @@ import Card from '@mui/material/Card';
 import Link from '@mui/material/Link';
 import { columns } from '../columns';
 import Box from '@mui/material/Box';
-
-import type {
-  GridColumnVisibilityModel,
-  GridActionsCellItemProps,
-  GridRowSelectionModel,
-  GridSlotProps,
-} from '@mui/x-data-grid';
 import {
   GridToolbarColumnsButton,
   GridToolbarFilterButton,
@@ -38,8 +31,13 @@ import {
   gridClasses,
   DataGrid,
 } from '@mui/x-data-grid';
+import type {
+  GridColumnVisibilityModel,
+  GridActionsCellItemProps,
+  GridRowSelectionModel,
+  GridSlotProps,
+} from '@mui/x-data-grid';
 
-// 👇 Importa tu adaptador + tipo de fila (ya creados por ti)
 import { mapItemsToRows, type ProductRow } from '../adapter';
 
 const HIDE_COLUMNS = { category: false };
@@ -164,9 +162,9 @@ export function ProductListView() {
           <DataGrid
             checkboxSelection
             disableRowSelectionOnClick
-            rows={dataFiltered}                  // ✅ filas desde tu backend + filtros
-            columns={columns}                    // ✅ tus columnas existentes
-            loading={isLoading}                  // ✅ loading real del backend
+            rows={dataFiltered}
+            columns={columns}
+            loading={isLoading}
             getRowHeight={() => 'auto'}
             pageSizeOptions={[5, 10, 20, { value: -1, label: 'All' }]}
             initialState={{ pagination: { paginationModel: { pageSize: 10 } } }}
@@ -309,7 +307,9 @@ function applyFilter({ inputData, filters }: ApplyFilterProps) {
   let data = inputData;
 
   if (stock.length) {
-    data = data.filter((product) => !!product.inventoryType && stock.includes(product.inventoryType));
+    data = data.filter(
+      (product) => !!product.inventoryType && stock.includes(product.inventoryType)
+    );
   }
 
   if (publish.length) {
