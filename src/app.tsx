@@ -1,6 +1,7 @@
 import { SettingsDrawer, defaultSettings, SettingsProvider } from 'src/components/settings';
 import { AuthProvider } from './auth/context/keycloak/auth-provider';
 import { MotionLazy } from 'src/components/animate/motion-lazy';
+import { LanguageProvider } from './store/LanguageContext';
 import { ProgressBar } from 'src/components/progress-bar';
 import { I18nProvider } from 'src/locales/i18n-provider';
 import { themeConfig, ThemeProvider } from 'src/theme';
@@ -20,22 +21,24 @@ export default function App({ children }: AppProps) {
   return (
     <I18nProvider>
       <AuthProvider>
-        <SettingsProvider defaultSettings={defaultSettings}>
-          <LocalizationProvider>
-            <ThemeProvider
-              noSsr
-              defaultMode={themeConfig.defaultMode}
-              modeStorageKey={themeConfig.modeStorageKey}
-            >
-              <MotionLazy>
-                <Snackbar />
-                <ProgressBar />
-                <SettingsDrawer defaultSettings={defaultSettings} />
-                {children}
-              </MotionLazy>
-            </ThemeProvider>
-          </LocalizationProvider>
-        </SettingsProvider>
+        <LanguageProvider>
+          <SettingsProvider defaultSettings={defaultSettings}>
+            <LocalizationProvider>
+              <ThemeProvider
+                noSsr
+                defaultMode={themeConfig.defaultMode}
+                modeStorageKey={themeConfig.modeStorageKey}
+              >
+                <MotionLazy>
+                  <Snackbar />
+                  <ProgressBar />
+                  <SettingsDrawer defaultSettings={defaultSettings} />
+                  {children}
+                </MotionLazy>
+              </ThemeProvider>
+            </LocalizationProvider>
+          </SettingsProvider>
+        </LanguageProvider>
       </AuthProvider>
     </I18nProvider>
   );
