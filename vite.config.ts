@@ -1,8 +1,8 @@
-// vite.config.ts
-import path from 'path';
-import checker from 'vite-plugin-checker';
 import { defineConfig, loadEnv } from 'vite';
 import react from '@vitejs/plugin-react-swc';
+import tailwindcss from '@tailwindcss/vite'
+import checker from 'vite-plugin-checker';
+import path from 'path';
 
 const PORT = 8080;
 
@@ -13,6 +13,7 @@ export default defineConfig(({ mode }) => {
 
   return {
     plugins: [
+      tailwindcss(),
       react(),
       checker({
         typescript: true,
