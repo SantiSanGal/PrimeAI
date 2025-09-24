@@ -1,6 +1,5 @@
 import { Navigate, type RouteObject } from 'react-router';
 import { RequireAuth } from '../guards/RequireAuth';
-import { componentsRoutes } from './components';
 import { dashboardRoutes } from './dashboard';
 import { mainRoutes } from './main';
 import { lazy } from 'react';
@@ -12,11 +11,7 @@ export const routesSection: RouteObject[] = [
   // PROTEGIDAS
   {
     element: <RequireAuth />,
-    children: [
-      ...dashboardRoutes,
-      ...mainRoutes,
-      ...componentsRoutes,
-    ],
+    children: [...dashboardRoutes, ...mainRoutes],
   },
 
   { path: '*', element: <Page404 /> },

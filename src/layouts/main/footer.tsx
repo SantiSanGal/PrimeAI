@@ -9,7 +9,7 @@ import Container from '@mui/material/Container';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 
-import { paths } from 'src/routes/paths';
+// import { paths } from 'src/routes/paths';
 import { RouterLink } from 'src/routes/components';
 
 import { _socials } from 'src/_mock';
@@ -23,9 +23,9 @@ const LINKS = [
   {
     headline: 'Minimal',
     children: [
-      { name: 'About us', href: paths.about },
-      { name: 'Contact us', href: paths.contact },
-      { name: 'FAQs', href: paths.faqs },
+      { name: 'About us', href: 'paths.about' },
+      { name: 'Contact us', href: 'paths.contact' },
+      { name: 'FAQs', href: 'paths.faqs' },
     ],
   },
   {

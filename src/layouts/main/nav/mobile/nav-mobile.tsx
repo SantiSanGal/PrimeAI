@@ -4,7 +4,7 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Drawer from '@mui/material/Drawer';
 
-import { paths } from 'src/routes/paths';
+// import { paths } from 'src/routes/paths';
 import { usePathname } from 'src/routes/hooks';
 
 import { Logo } from 'src/components/logo';
@@ -94,7 +94,7 @@ export function NavMobile({ data, open, onClose, slots, sx }: NavMobileProps) {
             variant="contained"
             rel="noopener"
             target="_blank"
-            href={paths.minimalStore}
+            href={'paths.minimalStore'}
           >
             Purchase
           </Button>

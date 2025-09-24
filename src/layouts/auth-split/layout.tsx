@@ -7,7 +7,7 @@ import Box from '@mui/material/Box';
 import Link from '@mui/material/Link';
 import Alert from '@mui/material/Alert';
 
-import { paths } from 'src/routes/paths';
+// import { paths } from 'src/routes/paths';
 import { RouterLink } from 'src/routes/components';
 
 import { CONFIG } from 'src/global-config';
@@ -67,7 +67,7 @@ export function AuthSplitLayout({
         <Box sx={{ display: 'flex', alignItems: 'center', gap: { xs: 1, sm: 1.5 } }}>
           {/** @slot Help link */}
           <Link
-            href={paths.faqs}
+            href={'paths.faqs'}
             component={RouterLink}
             color="inherit"
             sx={{ typography: 'subtitle2' }}
