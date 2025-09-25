@@ -53,10 +53,12 @@ export function useSocket({
     // cierra instancia previa por si cambió url/token
     destroy();
 
+    // en createAndConnect() de useSocket:
     const s = io(u, {
       path,
       withCredentials,
-      auth: token ? { token } : undefined,
+      // auth como función: se invoca en cada intento de conexión
+      auth: (cb) => cb(token ? { token } : {}),
       autoConnect: true,
       reconnection: true,
       reconnectionAttempts: Infinity,
@@ -64,7 +66,7 @@ export function useSocket({
       reconnectionDelayMax: 5000,
       randomizationFactor: 0.5,
       timeout: 10000,
-      transports, // si dejas undefined, socket.io hace fallback a polling si hace falta
+      transports,
     });
 
     s.on('connect', () => {

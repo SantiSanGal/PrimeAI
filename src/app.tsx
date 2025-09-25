@@ -3,6 +3,7 @@ import { AuthProvider } from './auth/context/keycloak/auth-provider';
 import { MotionLazy } from 'src/components/animate/motion-lazy';
 import { LanguageProvider } from './store/LanguageContext';
 import { ProgressBar } from 'src/components/progress-bar';
+import { SocketProvider } from 'src/store/SocketContext';
 import { I18nProvider } from 'src/locales/i18n-provider';
 import { themeConfig, ThemeProvider } from 'src/theme';
 import { LocalizationProvider } from 'src/locales';
@@ -11,9 +12,7 @@ import { usePathname } from 'src/routes/hooks';
 import { useEffect } from 'react';
 import 'src/global.css';
 
-type AppProps = {
-  children: React.ReactNode;
-};
+type AppProps = { children: React.ReactNode };
 
 export default function App({ children }: AppProps) {
   useScrollToTop();
@@ -21,37 +20,36 @@ export default function App({ children }: AppProps) {
   return (
     <I18nProvider>
       <AuthProvider>
-        <LanguageProvider>
-          <SettingsProvider defaultSettings={defaultSettings}>
-            <LocalizationProvider>
-              <ThemeProvider
-                noSsr
-                defaultMode={themeConfig.defaultMode}
-                modeStorageKey={themeConfig.modeStorageKey}
-              >
-                <MotionLazy>
-                  <Snackbar />
-                  <ProgressBar />
-                  <SettingsDrawer defaultSettings={defaultSettings} />
-                  {children}
-                </MotionLazy>
-              </ThemeProvider>
-            </LocalizationProvider>
-          </SettingsProvider>
-        </LanguageProvider>
+        {/* El SocketProvider necesita leer el estado de Keycloak */}
+        <SocketProvider>
+          <LanguageProvider>
+            <SettingsProvider defaultSettings={defaultSettings}>
+              <LocalizationProvider>
+                <ThemeProvider
+                  noSsr
+                  defaultMode={themeConfig.defaultMode}
+                  modeStorageKey={themeConfig.modeStorageKey}
+                >
+                  <MotionLazy>
+                    <Snackbar />
+                    <ProgressBar />
+                    <SettingsDrawer defaultSettings={defaultSettings} />
+                    {children}
+                  </MotionLazy>
+                </ThemeProvider>
+              </LocalizationProvider>
+            </SettingsProvider>
+          </LanguageProvider>
+        </SocketProvider>
       </AuthProvider>
     </I18nProvider>
   );
 }
 
-// ----------------------------------------------------------------------
-
 function useScrollToTop() {
   const pathname = usePathname();
-
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [pathname]);
-
   return null;
 }

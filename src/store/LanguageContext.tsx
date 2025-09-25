@@ -1,5 +1,4 @@
 import React, { createContext, useReducer, ReactNode, useEffect } from 'react';
-
 import en from '../locales/en.json';
 import es from '../locales/es.json';
 
