@@ -1,7 +1,7 @@
 import type { IProductItem } from 'src/types/product';
 // import type { CheckoutContextValue } from 'src/types/checkout';
 
-import { useCallback } from 'react';
+// import { useCallback } from 'react';
 import { useForm, Controller } from 'react-hook-form';
 
 import Box from '@mui/material/Box';
@@ -14,7 +14,7 @@ import Typography from '@mui/material/Typography';
 import Link, { linkClasses } from '@mui/material/Link';
 import { formHelperTextClasses } from '@mui/material/FormHelperText';
 
-import { paths } from 'src/routes/paths';
+// import { paths } from 'src/routes/paths';
 import { useRouter } from 'src/routes/hooks';
 
 import { fCurrency, fShortenNumber } from 'src/utils/format-number';
@@ -92,7 +92,7 @@ export function ProductDetailsSummary({
       // if (!existProduct) {
       //   onAddToCart?.({ ...data, colors: [values.colors] });
       // }
-      router.push(paths.product.checkout);
+      router.push('paths.product.checkout');
     } catch (error) {
       console.error(error);
     }

@@ -13,7 +13,7 @@ import Button from '@mui/material/Button';
 import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 
-import { paths } from 'src/routes/paths';
+// import { paths } from 'src/routes/paths';
 import { RouterLink } from 'src/routes/components';
 
 import { Iconify } from 'src/components/iconify';
@@ -83,7 +83,7 @@ export function ProductShopDetailsView({ product, error, loading }: Props) {
           action={
             <Button
               component={RouterLink}
-              href={paths.product.root}
+              href={'paths.product.root'}
               startIcon={<Iconify width={16} icon="eva:arrow-ios-back-fill" />}
               sx={{ mt: 3 }}
             >
@@ -104,7 +104,7 @@ export function ProductShopDetailsView({ product, error, loading }: Props) {
       <CustomBreadcrumbs
         links={[
           { name: 'Home', href: '/' },
-          { name: 'Shop', href: paths.product.root },
+          { name: 'Shop', href: 'paths.product.root' },
           { name: product?.name },
         ]}
         sx={{ mb: 5 }}

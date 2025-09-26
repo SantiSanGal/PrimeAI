@@ -43,7 +43,8 @@ export function NavMobile({ data, open, onClose, slots, sx, className, ...other 
       PaperProps={{
         className: mergeClasses([layoutClasses.nav.root, layoutClasses.nav.vertical, className]),
         sx: [
-          (theme) => ({
+          // (theme) => ({
+          () => ({
             overflow: 'unset',
             bgcolor: 'var(--layout-nav-bg)',
             width: 'var(--layout-nav-mobile-width)',

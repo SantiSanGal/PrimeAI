@@ -1,3 +1,4 @@
+// TODO: borrar (Probablemente)
 import type { IProductItem, IProductFilters } from 'src/types/product';
 
 import { useState } from 'react';
@@ -9,7 +10,7 @@ import Stack from '@mui/material/Stack';
 import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 
-import { paths } from 'src/routes/paths';
+// import { paths } from 'src/routes/paths';
 
 import {
   PRODUCT_SORT_OPTIONS,
@@ -24,7 +25,7 @@ import { EmptyContent } from 'src/components/empty-content';
 import { CartIcon } from '../cart-icon';
 import { ProductList } from '../product-list';
 import { ProductSort } from '../product-sort';
-import { ProductSearch } from '../product-search';
+// import { ProductSearch } from '../product-search';
 // import { useCheckoutContext } from '../../checkout/context';
 import { ProductFiltersDrawer } from '../product-filters-drawer';
 import { ProductFiltersResult } from '../product-filters-result';
@@ -79,7 +80,7 @@ export function ProductShopView({ products, loading }: Props) {
         alignItems: { xs: 'flex-end', sm: 'center' },
       }}
     >
-      <ProductSearch redirectPath={(id: string) => paths.product.details(id)} />
+      {/* <ProductSearch redirectPath={(id: string) => paths.product.details(id)} /> */}
 
       <Box sx={{ gap: 1, flexShrink: 0, display: 'flex' }}>
         <ProductFiltersDrawer

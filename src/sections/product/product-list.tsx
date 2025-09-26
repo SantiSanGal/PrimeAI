@@ -4,7 +4,7 @@ import type { IProductItem } from 'src/types/product';
 import Box from '@mui/material/Box';
 import Pagination, { paginationClasses } from '@mui/material/Pagination';
 
-import { paths } from 'src/routes/paths';
+// import { paths } from 'src/routes/paths';
 
 import { ProductItem } from './product-item';
 import { ProductItemSkeleton } from './product-skeleton';
@@ -24,7 +24,7 @@ export function ProductList({ products, loading, sx, ...other }: Props) {
       <ProductItem
         key={product.id}
         product={product}
-        detailsHref={paths.product.details(product.id)}
+        detailsHref={'paths.product.details(product.id)'}
       />
     ));
 

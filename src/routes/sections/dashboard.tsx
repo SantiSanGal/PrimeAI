@@ -14,6 +14,8 @@ const ProductDetailsPage = lazy(() => import('src/pages/dashboard/product/detail
 const ProductListPage = lazy(() => import('src/pages/dashboard/product/list'));
 const ProductCreatePage = lazy(() => import('src/pages/dashboard/product/new'));
 const ProductEditPage = lazy(() => import('src/pages/dashboard/product/edit'));
+const ProductBrandListPage = lazy(() => import('src/pages/dashboard/product/brand-list'));
+const ProductCategoriesListPage = lazy(() => import('src/pages/dashboard/product/categories-list'));
 // Order
 const OrderListPage = lazy(() => import('src/pages/dashboard/order/list'));
 const OrderDetailsPage = lazy(() => import('src/pages/dashboard/order/details'));
@@ -30,11 +32,6 @@ const UserCreatePage = lazy(() => import('src/pages/dashboard/user/new'));
 const UserEditPage = lazy(() => import('src/pages/dashboard/user/edit'));
 // Account
 const AccountGeneralPage = lazy(() => import('src/pages/dashboard/user/account/general'));
-const AccountBillingPage = lazy(() => import('src/pages/dashboard/user/account/billing'));
-const AccountSocialsPage = lazy(() => import('src/pages/dashboard/user/account/socials'));
-const AccountNotificationsPage = lazy(
-  () => import('src/pages/dashboard/user/account/notifications')
-);
 const AccountChangePasswordPage = lazy(
   () => import('src/pages/dashboard/user/account/change-password')
 );
@@ -79,9 +76,9 @@ export const dashboardRoutes: RouteObject[] = [
                 element: accountLayout(),
                 children: [
                   { index: true, element: <AccountGeneralPage /> },
-                  { path: 'billing', element: <AccountBillingPage /> },
-                  { path: 'notifications', element: <AccountNotificationsPage /> },
-                  { path: 'socials', element: <AccountSocialsPage /> },
+                  // { path: 'billing', element: <AccountBillingPage /> },
+                  // { path: 'notifications', element: <AccountNotificationsPage /> },
+                  // { path: 'socials', element: <AccountSocialsPage /> },
                   { path: 'change-password', element: <AccountChangePasswordPage /> },
                 ],
               },
@@ -95,6 +92,8 @@ export const dashboardRoutes: RouteObject[] = [
               { path: ':id', element: <ProductDetailsPage /> },
               { path: 'new', element: <ProductCreatePage /> },
               { path: ':id/edit', element: <ProductEditPage /> },
+              { path: 'categories', element: <ProductCategoriesListPage /> },
+              { path: 'brands', element: <ProductBrandListPage /> },
             ],
           },
           {

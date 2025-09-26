@@ -1,7 +1,7 @@
 import type { ButtonProps } from '@mui/material/Button';
 import { useAuth } from 'src/store/KeycloakProvider';
 import { toast } from 'src/components/snackbar';
-import { useRouter } from 'src/routes/hooks';
+// import { useRouter } from 'src/routes/hooks';
 import Button from '@mui/material/Button';
 import { useCallback } from 'react';
 
@@ -11,7 +11,7 @@ type Props = ButtonProps & {
 
 export function SignOutButton({ onClose, sx, ...other }: Props) {
   const { logout } = useAuth();
-  const router = useRouter();
+  // const router = useRouter();
 
   const handleLogout = useCallback(async () => {
     try {

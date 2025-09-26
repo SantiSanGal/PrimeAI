@@ -18,7 +18,11 @@ type Props = CardProps & {
   cards: IPaymentCard[];
 };
 
-export function AccountBillingPayment({ cards, sx, ...other }: Props) {
+export function AccountBillingPayment({
+  // cards,
+  sx,
+  ...other
+}: Props) {
   const openForm = useBoolean();
 
   return (

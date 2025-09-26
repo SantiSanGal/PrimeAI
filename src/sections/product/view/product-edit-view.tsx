@@ -1,14 +1,8 @@
-import type { IProductItem } from 'src/types/product';
-
-import { paths } from 'src/routes/paths';
-
-import { DashboardContent } from 'src/layouts/dashboard';
-
 import { CustomBreadcrumbs } from 'src/components/custom-breadcrumbs';
-
 import { ProductNewEditForm } from '../product-new-edit-form';
-
-// ----------------------------------------------------------------------
+import { DashboardContent } from 'src/layouts/dashboard';
+import type { IProductItem } from 'src/types/product';
+import { paths } from 'src/routes/paths';
 
 type Props = {
   product?: IProductItem;

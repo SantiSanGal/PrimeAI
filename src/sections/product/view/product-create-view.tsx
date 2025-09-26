@@ -1,12 +1,7 @@
-import { paths } from 'src/routes/paths';
-
-import { DashboardContent } from 'src/layouts/dashboard';
-
 import { CustomBreadcrumbs } from 'src/components/custom-breadcrumbs';
-
 import { ProductNewEditForm } from '../product-new-edit-form';
-
-// ----------------------------------------------------------------------
+import { DashboardContent } from 'src/layouts/dashboard';
+import { paths } from 'src/routes/paths';
 
 export function ProductCreateView() {
   return (

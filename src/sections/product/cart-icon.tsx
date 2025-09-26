@@ -3,7 +3,7 @@ import type { BoxProps } from '@mui/material/Box';
 import Box from '@mui/material/Box';
 import Badge from '@mui/material/Badge';
 
-import { paths } from 'src/routes/paths';
+// import { paths } from 'src/routes/paths';
 import { RouterLink } from 'src/routes/components';
 
 import { Iconify } from 'src/components/iconify';
@@ -18,7 +18,7 @@ export function CartIcon({ totalItems, sx, ...other }: Props) {
   return (
     <Box
       component={RouterLink}
-      href={paths.product.checkout}
+      href={'paths.product.checkout'}
       sx={[
         (theme) => ({
           right: 0,

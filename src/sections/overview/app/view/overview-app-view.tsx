@@ -1,4 +1,10 @@
-import { _appAuthors, _appRelated, _appFeatured, _appInvoices, _appInstalled } from 'src/_mock';
+import {
+  _appAuthors,
+  _appRelated,
+  // _appFeatured,
+  _appInvoices,
+  _appInstalled,
+} from 'src/_mock';
 import { AppTopInstalledCountries } from '../app-top-installed-countries';
 import { AppCurrentDownload } from '../app-current-download';
 import { svgColorClasses } from 'src/components/svg-color';
@@ -9,7 +15,7 @@ import { AppTopAuthors } from '../app-top-authors';
 import { AppNewInvoice } from '../app-new-invoice';
 import { AppTopRelated } from '../app-top-related';
 import { useTheme } from '@mui/material/styles';
-import { useMockedUser } from 'src/auth/hooks';
+// import { useMockedUser } from 'src/auth/hooks';
 import { AppWidget } from '../app-widget';
 import Grid from '@mui/material/Grid2';
 import Box from '@mui/material/Box';
@@ -17,7 +23,7 @@ import Box from '@mui/material/Box';
 // ----------------------------------------------------------------------
 
 export function OverviewAppView() {
-  const { user } = useMockedUser();
+  // const { user } = useMockedUser();
 
   const theme = useTheme();
 
@@ -82,7 +88,20 @@ export function OverviewAppView() {
             title="Sales by Channel"
             subheader="Monthly totals — +43% YoY"
             chart={{
-              categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+              categories: [
+                'Jan',
+                'Feb',
+                'Mar',
+                'Apr',
+                'May',
+                'Jun',
+                'Jul',
+                'Aug',
+                'Sep',
+                'Oct',
+                'Nov',
+                'Dec',
+              ],
               series: [
                 {
                   name: '2025',
@@ -114,7 +133,6 @@ export function OverviewAppView() {
               ],
             }}
           />
-
         </Grid>
 
         <Grid size={{ xs: 12, lg: 8 }}>

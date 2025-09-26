@@ -1,3 +1,4 @@
+//TODO: Adaptar a Categories
 import { useState, useEffect, forwardRef, useCallback, useMemo } from 'react';
 import { ProductTableFiltersResult } from '../product-table-filters-result';
 import { CustomBreadcrumbs } from 'src/components/custom-breadcrumbs';
@@ -43,7 +44,7 @@ import { mapItemsToRows, type ProductRow } from '../adapter';
 const HIDE_COLUMNS = { category: false };
 const HIDE_COLUMNS_TOGGLABLE = ['category', 'actions'];
 
-export function ProductListView() {
+export function CategoriesListView() {
   const { data, isLoading } = useItems();
   const confirmDialog = useBoolean();
 

@@ -71,11 +71,16 @@ export function ResultItem({ title, path, labels, href, sx, ...other }: Props) {
       />
 
       <Box sx={{ gap: 0.75, display: 'flex' }}>
-        {[...labels].reverse().map((label, index) => (
-          <Label key={label} color="default">
-            {label}
-          </Label>
-        ))}
+        {[...labels].reverse().map(
+          (
+            label
+            // index
+          ) => (
+            <Label key={label} color="default">
+              {label}
+            </Label>
+          )
+        )}
       </Box>
     </ListItemButton>
   );

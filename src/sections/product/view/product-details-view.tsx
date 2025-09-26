@@ -1,3 +1,4 @@
+//TODO: Borrar (Probablemente)
 import type { IProductItem } from 'src/types/product';
 
 import { useTabs } from 'minimal-shared/hooks';
@@ -105,7 +106,7 @@ export function ProductDetailsView({ product, error, loading }: Props) {
     <DashboardContent>
       <ProductDetailsToolbar
         backHref={paths.dashboard.product.root}
-        liveHref={paths.product.details(`${product?.id}`)}
+        liveHref={'paths.product.details(`${product?.id}`)'}
         editHref={paths.dashboard.product.edit(`${product?.id}`)}
         publish={publish}
         onChangePublish={handleChangePublish}

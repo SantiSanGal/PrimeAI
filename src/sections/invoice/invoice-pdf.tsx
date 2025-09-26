@@ -6,7 +6,7 @@ import {
   Text,
   View,
   Font,
-  Image,
+  // Image,
   Document,
   PDFViewer,
   StyleSheet,
