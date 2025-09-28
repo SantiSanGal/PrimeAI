@@ -1,5 +1,5 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import { ItemsResponse } from '@/core/types/api-response.type';
+import { CategoriesResponse } from '@/core/types/api-response.type';
 import { getCategories } from '@/core/actions';
 
 export const categoriesKeys = {
@@ -8,8 +8,7 @@ export const categoriesKeys = {
 };
 
 export const useCategories = () => {
-  return useQuery<ItemsResponse, Error>({
-    //TODO: Cambiar a categories response
+  return useQuery<CategoriesResponse, Error>({
     queryKey: categoriesKeys.list('categories'),
     queryFn: getCategories,
   });

@@ -1,4 +1,4 @@
-import { Brand, Item } from "./items";
+import { Brand, Categories, Item } from "./items";
 
 export interface APIListResponse<T> {
     page: APIListResponsePage<T>;
@@ -18,3 +18,4 @@ export interface PagePage {
 
 export type ItemsResponse = APIListResponse<Item[]>
 export type BrandsResponse = APIListResponse<Brand[]>
+export type CategoriesResponse = APIListResponse<Categories[]>

@@ -5,6 +5,7 @@ import { useBoolean, useSetState } from 'minimal-shared/hooks';
 import { ProductTableToolbar } from '../product-table-toolbar';
 import type { IProductTableFilters } from 'src/types/product';
 import type { UseSetStateReturn } from 'minimal-shared/hooks';
+import { mapItemsToRows, type ProductRow } from '../adapter';
 import { ConfirmDialog } from 'src/components/custom-dialog';
 import { EmptyContent } from 'src/components/empty-content';
 import type { Theme, SxProps } from '@mui/material/styles';
@@ -38,7 +39,6 @@ import type {
   GridSlotProps,
 } from '@mui/x-data-grid';
 
-import { mapItemsToRows, type ProductRow } from '../adapter';
 
 const HIDE_COLUMNS = { category: false };
 const HIDE_COLUMNS_TOGGLABLE = ['category', 'actions'];

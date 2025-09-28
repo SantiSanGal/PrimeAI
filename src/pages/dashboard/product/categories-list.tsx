@@ -1,4 +1,4 @@
-import { ProductListView } from '@/sections/product/view';
+import { CategoriesListView } from '@/sections/product/view/product-categories-list-view';
 import { Helmet } from 'react-helmet-async';
 import { CONFIG } from 'src/global-config';
 
@@ -11,7 +11,7 @@ export default function Page() {
         <title> {metadata.title} - Categories</title>
       </Helmet>
 
-      <ProductListView />
+      <CategoriesListView />
     </>
   );
 }

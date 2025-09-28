@@ -1,28 +1,19 @@
-//TODO: Adaptar a Brands
 import { useState, useEffect, forwardRef, useCallback, useMemo } from 'react';
-import { ProductTableFiltersResult } from '../product-table-filters-result';
 import { CustomBreadcrumbs } from 'src/components/custom-breadcrumbs';
-import { useBoolean, useSetState } from 'minimal-shared/hooks';
-import { ProductTableToolbar } from '../product-table-toolbar';
-import type { IProductTableFilters } from 'src/types/product';
-import type { UseSetStateReturn } from 'minimal-shared/hooks';
-import { mapItemsToRows, type ProductRow } from '../adapter';
+import { useBoolean } from 'minimal-shared/hooks';
 import { ConfirmDialog } from 'src/components/custom-dialog';
 import { EmptyContent } from 'src/components/empty-content';
 import type { Theme, SxProps } from '@mui/material/styles';
 import { DashboardContent } from 'src/layouts/dashboard';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import { RouterLink } from 'src/routes/components';
-import { PRODUCT_STOCK_OPTIONS } from 'src/_mock';
 import { Iconify } from 'src/components/iconify';
 import { toast } from 'src/components/snackbar';
-import { useItems } from 'src/hooks/useItems';
 import MenuItem from '@mui/material/MenuItem';
 import { paths } from 'src/routes/paths';
 import Button from '@mui/material/Button';
 import Card from '@mui/material/Card';
 import Link from '@mui/material/Link';
-import { columns } from '../columns';
 import Box from '@mui/material/Box';
 import {
   GridToolbarColumnsButton,
@@ -40,21 +31,27 @@ import type {
   GridSlotProps,
 } from '@mui/x-data-grid';
 
-const HIDE_COLUMNS = { category: false };
-const HIDE_COLUMNS_TOGGLABLE = ['category', 'actions'];
+import { useBrands } from '@/hooks/useBrands';
+import { brandsColumns } from '../brands-columns';
+
+const HIDE_COLUMNS: GridColumnVisibilityModel = {};
+const HIDE_COLUMNS_TOGGLABLE: string[] = [];
 
 export function BrandsListView() {
-  const { data, isLoading } = useItems();
+  const { data: brandsData, isLoading: brandsIsLoading } = useBrands();
+
   const confirmDialog = useBoolean();
 
-  const rowsFromApi = useMemo(() => mapItemsToRows(data), [data]);
+  // Normalizamos rows desde la API (ya trae `id`)
+  const rowsFromApi = useMemo(
+    () => brandsData?.page?.content ?? [],
+    [brandsData]
+  );
 
-  const [tableData, setTableData] = useState<ProductRow[]>(rowsFromApi);
+  // Estado local para permitir delete client-side
+  const [tableData, setTableData] = useState(rowsFromApi);
   const [selectedRowIds, setSelectedRowIds] = useState<GridRowSelectionModel>([]);
   const [filterButtonEl, setFilterButtonEl] = useState<HTMLButtonElement | null>(null);
-
-  const filters = useSetState<IProductTableFilters>({ publish: [], stock: [] });
-  const { state: currentFilters } = filters;
 
   const [columnVisibilityModel, setColumnVisibilityModel] =
     useState<GridColumnVisibilityModel>(HIDE_COLUMNS);
@@ -64,37 +61,27 @@ export function BrandsListView() {
     setSelectedRowIds([]);
   }, [rowsFromApi]);
 
-  const canReset = currentFilters.publish.length > 0 || currentFilters.stock.length > 0;
-
-  const dataFiltered = applyFilter({ inputData: tableData, filters: currentFilters });
-
   const handleDeleteRows = useCallback(() => {
     if (!selectedRowIds.length) return;
-
     const idSet = new Set(selectedRowIds as string[]);
-    const deleteRows = tableData.filter((row) => !idSet.has(row.id));
-
+    const deleteRows = tableData.filter((row: any) => !idSet.has(row.id));
     toast.success('Delete success!');
-
     setTableData(deleteRows);
   }, [selectedRowIds, tableData]);
 
   const CustomToolbarCallback = useCallback(
     () => (
       <CustomToolbar
-        filters={filters}
-        canReset={canReset}
         selectedRowIds={selectedRowIds}
         setFilterButtonEl={setFilterButtonEl}
-        filteredResults={dataFiltered.length}
         onOpenConfirmDeleteRows={confirmDialog.onTrue}
       />
     ),
-    [currentFilters, selectedRowIds, dataFiltered.length, confirmDialog.onTrue]
+    [selectedRowIds, confirmDialog.onTrue]
   );
 
   const getTogglableColumns = () =>
-    columns
+    brandsColumns
       .filter((column) => !HIDE_COLUMNS_TOGGLABLE.includes(column.field))
       .map((column) => column.field);
 
@@ -127,11 +114,11 @@ export function BrandsListView() {
     <>
       <DashboardContent sx={{ flexGrow: 1, display: 'flex', flexDirection: 'column' }}>
         <CustomBreadcrumbs
-          heading="List"
+          heading="Brands"
           links={[
             { name: 'Dashboard', href: paths.dashboard.root },
             { name: 'Product', href: paths.dashboard.product.root },
-            { name: 'List' },
+            { name: 'Brands' },
           ]}
           action={
             <Button
@@ -140,7 +127,7 @@ export function BrandsListView() {
               variant="contained"
               startIcon={<Iconify icon="mingcute:add-line" />}
             >
-              New product
+              Add Brand
             </Button>
           }
           sx={{ mb: { xs: 3, md: 5 } }}
@@ -158,9 +145,9 @@ export function BrandsListView() {
           <DataGrid
             checkboxSelection
             disableRowSelectionOnClick
-            rows={dataFiltered}
-            columns={columns}
-            loading={isLoading}
+            rows={tableData}
+            columns={brandsColumns}
+            loading={brandsIsLoading}
             getRowHeight={() => 'auto'}
             pageSizeOptions={[5, 10, 20, { value: -1, label: 'All' }]}
             initialState={{ pagination: { paginationModel: { pageSize: 10 } } }}
@@ -196,32 +183,18 @@ declare module '@mui/x-data-grid' {
 }
 
 type CustomToolbarProps = GridSlotProps['toolbar'] & {
-  canReset: boolean;
-  filteredResults: number;
   selectedRowIds: GridRowSelectionModel;
-  filters: UseSetStateReturn<IProductTableFilters>;
-
   onOpenConfirmDeleteRows: () => void;
 };
 
 function CustomToolbar({
-  filters,
-  canReset,
   selectedRowIds,
-  filteredResults,
   setFilterButtonEl,
   onOpenConfirmDeleteRows,
 }: CustomToolbarProps) {
   return (
     <>
       <GridToolbarContainer>
-        <ProductTableToolbar
-          filters={filters}
-          options={{
-            stocks: PRODUCT_STOCK_OPTIONS,
-          }}
-        />
-
         <GridToolbarQuickFilter />
 
         <Box
@@ -249,14 +222,6 @@ function CustomToolbar({
           <GridToolbarExport />
         </Box>
       </GridToolbarContainer>
-
-      {canReset && (
-        <ProductTableFiltersResult
-          filters={filters}
-          totalResults={filteredResults}
-          sx={{ p: 2.5, pt: 0 }}
-        />
-      )}
     </>
   );
 }
@@ -288,29 +253,3 @@ export const GridActionsLinkItem = forwardRef<HTMLLIElement, GridActionsLinkItem
     );
   }
 );
-
-// ----------------------------------------------------------------------
-// Ajustamos applyFilter para tu tipo de fila del backend
-
-type ApplyFilterProps = {
-  inputData: ProductRow[];
-  filters: IProductTableFilters;
-};
-
-function applyFilter({ inputData, filters }: ApplyFilterProps) {
-  const { stock, publish } = filters;
-
-  let data = inputData;
-
-  if (stock.length) {
-    data = data.filter(
-      (product) => !!product.inventoryType && stock.includes(product.inventoryType)
-    );
-  }
-
-  if (publish.length) {
-    data = data.filter((product) => !!product.publish && publish.includes(product.publish));
-  }
-
-  return data;
-}

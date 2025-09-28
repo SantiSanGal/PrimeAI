@@ -76,9 +76,6 @@ export const dashboardRoutes: RouteObject[] = [
                 element: accountLayout(),
                 children: [
                   { index: true, element: <AccountGeneralPage /> },
-                  // { path: 'billing', element: <AccountBillingPage /> },
-                  // { path: 'notifications', element: <AccountNotificationsPage /> },
-                  // { path: 'socials', element: <AccountSocialsPage /> },
                   { path: 'change-password', element: <AccountChangePasswordPage /> },
                 ],
               },

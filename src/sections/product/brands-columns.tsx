@@ -1,46 +1,60 @@
-import { RenderCellCreatedAt, RenderCellPrice, RenderCellProduct } from './product-table-row';
 import { GridActionsCellItem, type GridColDef } from '@mui/x-data-grid';
-import { paths } from 'src/routes/paths';
-import { GridActionsLinkItem } from './view';
+import { fDate, fTime } from 'src/utils/format-time';
 import { Iconify } from '@/components/iconify';
+import { GridActionsLinkItem } from './view';
+import { Label } from 'src/components/label';
+import Stack from '@mui/material/Stack';
+import { paths } from '@/routes/paths';
+import Box from '@mui/material/Box';
+
+export type BrandRow = {
+    id: string;
+    name: string;
+    enabled: boolean;
+    createdAt: string;
+    updatedAt: string;
+};
+
+const RenderCellDateTime = ({ value }: { value: string }) => (
+    <Stack spacing={0.5}>
+        <Box component="span">{fDate(value)}</Box>
+        <Box component="span" sx={{ typography: 'caption', color: 'text.secondary' }}>
+            {fTime(value)}
+        </Box>
+    </Stack>
+);
 
 const handleDeleteRow = () => { }
 
-export const columns: GridColDef[] = [
+export const brandsColumns: GridColDef[] = [
     {
         field: 'name',
-        headerName: 'Product',
+        headerName: 'Name',
         flex: 1,
-        minWidth: 360,
-        hideable: false,
-        renderCell: (params) => (
-            <RenderCellProduct params={params} href={paths.dashboard.product.details(params.row.id)} />
-        ),
+        minWidth: 260,
     },
     {
-        field: 'description',
-        headerName: 'Description',
-        flex: 1,
-        minWidth: 300,
-        // si quieres truncar, puedes usar valueGetter + valueFormatter o un renderCell simple
+        field: 'enabled',
+        headerName: 'Enabled',
+        width: 130,
+        type: 'boolean',
+        renderCell: (params) => (
+            <Label variant="soft" color={params.value ? 'success' : 'default'}>
+                {params.value ? 'Enabled' : 'Disabled'}
+            </Label>
+        ),
     },
     {
         field: 'createdAt',
         headerName: 'Created at',
         width: 180,
-        renderCell: (params) => <RenderCellCreatedAt params={params} />,
+        renderCell: (params) => <RenderCellDateTime value={params.value as string} />,
     },
     {
-        field: 'quantity',
-        headerName: 'Quantity',
-        width: 120,
-        type: 'number',
-    },
-    {
-        field: 'sellPrice',
-        headerName: 'Sell price',
-        width: 140,
-        renderCell: (params) => <RenderCellPrice params={params} />,
+        field: 'updatedAt',
+        headerName: 'Updated at',
+        width: 180,
+        renderCell: (params) => <RenderCellDateTime value={params.value as string} />,
     },
     {
         type: 'actions',
