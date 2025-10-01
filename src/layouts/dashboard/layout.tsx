@@ -8,7 +8,7 @@ import { LanguagePopover } from '../components/language-popover';
 // import { SettingsButton } from '../components/settings-button';
 import type { MainSectionProps } from '../core/main-section';
 import { useSettingsContext } from 'src/components/settings';
-import { iconButtonClasses } from '@mui/material/IconButton';
+import IconButton, { iconButtonClasses } from '@mui/material/IconButton';
 import { AccountDrawer } from '../components/account-drawer';
 import type { Breakpoint } from '@mui/material/styles';
 import { LayoutSection } from '../core/layout-section';
@@ -33,6 +33,7 @@ import Alert from '@mui/material/Alert';
 import { allLangs } from 'src/locales';
 import Box from '@mui/material/Box';
 import { merge } from 'es-toolkit';
+import { Iconify } from '@/components/iconify';
 
 type LayoutBaseProps = Pick<LayoutSectionProps, 'sx' | 'children' | 'cssVars'>;
 
@@ -129,8 +130,8 @@ export function DashboardLayout({
 
           {/** @slot Settings button */}
           {/* TODO: CAMBIAR */}
-          <div className=''>
-            <button className='size-[40px] rounded-full hover:bg-[#f3f4f5] hover:size-[43px] transition-transform flex items-center justify-center'>
+          <IconButton>
+            <button className='transition-transform flex items-center justify-center'>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="24"
@@ -158,7 +159,11 @@ export function DashboardLayout({
                 <circle cx="20" cy="8" r=".5" />
               </svg>
             </button>
-          </div>
+            {/* <Iconify icon="uim:telegram-alt" /> */}
+          </IconButton>
+          {/* <div className=''>
+
+          </div> */}
           {/* <SettingsButton /> */}
 
           {/** @slot Account drawer */}

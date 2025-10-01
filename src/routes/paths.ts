@@ -17,6 +17,7 @@ export const paths = {
   page500: '/error/500',
   dashboard: {
     root: ROOTS.DASHBOARD,
+    chat: `${ROOTS.DASHBOARD}/chat`,
     general: {
       app: `${ROOTS.DASHBOARD}/app`,
       analytics: `${ROOTS.DASHBOARD}/analytics`,

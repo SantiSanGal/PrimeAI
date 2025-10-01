@@ -36,6 +36,8 @@ const AccountChangePasswordPage = lazy(
   () => import('src/pages/dashboard/user/account/change-password')
 );
 
+const ChatPage = lazy(() => import('src/pages/dashboard/chat'));
+
 const dashboardLayout = () => (
   <DashboardLayout>
     <Suspense fallback={<LoadingScreen />}>
@@ -111,6 +113,7 @@ export const dashboardRoutes: RouteObject[] = [
               { path: 'new', element: <InvoiceCreatePage /> },
             ],
           },
+          { path: 'chat', element: <ChatPage /> },
         ],
       },
     ],
