@@ -1,6 +1,8 @@
+import { deleteBrands, getBrands, postBrands, putBrands } from '@/core/actions';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import {  type NewBrandData } from '@/core/actions/items/brands';
 import { BrandsResponse } from '@/core/types/api-response.type';
-import { getBrands } from '@/core/actions';
+import { toast } from 'src/components/snackbar';
 
 export const brandsKeys = {
   all: () => ['brands'] as const,
@@ -14,17 +16,21 @@ export const useBrands = () => {
   });
 };
 
+
 export const useCreateBrand = () => {
   const queryClient = useQueryClient();
 
   const mutate = useMutation({
-    mutationFn: async () => {
-      return [];
-    },
+    mutationFn: (newBrand: NewBrandData) => postBrands(newBrand),
     onSuccess: () => {
       queryClient.invalidateQueries({
         queryKey: brandsKeys.all(),
       });
+      toast.success('Brand created successfully!');
+    },
+    onError: (error) => {
+      console.error('Failed to create brand:', error);
+      toast.error('Could not create the brand. Please try again.');
     },
   });
 
@@ -35,9 +41,7 @@ export const useEditBrand = () => {
   const queryClient = useQueryClient();
 
   const mutate = useMutation({
-    mutationFn: async () => {
-      return [];
-    },
+    mutationFn: putBrands,
     onSuccess: () => {
       queryClient.invalidateQueries({
         queryKey: brandsKeys.all(),
@@ -52,9 +56,7 @@ export const useDeleteBrand = () => {
   const queryClient = useQueryClient();
 
   const mutate = useMutation({
-    mutationFn: async () => {
-      return [];
-    },
+    mutationFn: deleteBrands,
     onSuccess: () => {
       queryClient.invalidateQueries({
         queryKey: brandsKeys.all(),

@@ -15,6 +15,14 @@ import Button from '@mui/material/Button';
 import Card from '@mui/material/Card';
 import Link from '@mui/material/Link';
 import Box from '@mui/material/Box';
+
+import Dialog from '@mui/material/Dialog';
+import TextField from '@mui/material/TextField';
+import DialogTitle from '@mui/material/DialogTitle';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import LoadingButton from '@mui/lab/LoadingButton';
+
 import {
   GridToolbarColumnsButton,
   GridToolbarFilterButton,
@@ -31,7 +39,7 @@ import type {
   GridSlotProps,
 } from '@mui/x-data-grid';
 
-import { useBrands } from '@/hooks/useBrands';
+import { useBrands, useCreateBrand } from '@/hooks/useBrands';
 import { brandsColumns } from '../brands-columns';
 
 const HIDE_COLUMNS: GridColumnVisibilityModel = {};
@@ -40,19 +48,17 @@ const HIDE_COLUMNS_TOGGLABLE: string[] = [];
 export function BrandsListView() {
   const { data: brandsData, isLoading: brandsIsLoading } = useBrands();
 
+  const addBrandModal = useBoolean();
+  const { mutate: createBrand, isPending: isCreating } = useCreateBrand();
+  const [newBrandName, setNewBrandName] = useState('');
+
   const confirmDialog = useBoolean();
 
-  // Normalizamos rows desde la API (ya trae `id`)
-  const rowsFromApi = useMemo(
-    () => brandsData?.page?.content ?? [],
-    [brandsData]
-  );
+  const rowsFromApi = useMemo(() => brandsData?.page?.content ?? [], [brandsData]);
 
-  // Estado local para permitir delete client-side
   const [tableData, setTableData] = useState(rowsFromApi);
   const [selectedRowIds, setSelectedRowIds] = useState<GridRowSelectionModel>([]);
   const [filterButtonEl, setFilterButtonEl] = useState<HTMLButtonElement | null>(null);
-
   const [columnVisibilityModel, setColumnVisibilityModel] =
     useState<GridColumnVisibilityModel>(HIDE_COLUMNS);
 
@@ -60,6 +66,23 @@ export function BrandsListView() {
     setTableData(rowsFromApi);
     setSelectedRowIds([]);
   }, [rowsFromApi]);
+
+  const handleCreateBrand = useCallback(async () => {
+    if (!newBrandName.trim()) {
+      toast.error('Brand name is required');
+      return;
+    }
+
+    createBrand(
+      { name: newBrandName },
+      {
+        onSuccess: () => {
+          addBrandModal.onFalse();
+          setNewBrandName('');
+        },
+      }
+    );
+  }, [newBrandName, createBrand, addBrandModal]);
 
   const handleDeleteRows = useCallback(() => {
     if (!selectedRowIds.length) return;
@@ -122,10 +145,9 @@ export function BrandsListView() {
           ]}
           action={
             <Button
-              component={RouterLink}
-              href={paths.dashboard.product.new}
               variant="contained"
               startIcon={<Iconify icon="mingcute:add-line" />}
+              onClick={addBrandModal.onTrue}
             >
               Add Brand
             </Button>
@@ -169,6 +191,42 @@ export function BrandsListView() {
         </Card>
       </DashboardContent>
 
+      <Dialog
+        open={addBrandModal.value}
+        onClose={addBrandModal.onFalse}
+        PaperProps={{
+          component: 'form',
+          onSubmit: (e: React.FormEvent<HTMLFormElement>) => {
+            e.preventDefault();
+            handleCreateBrand();
+          },
+        }}
+      >
+        <DialogTitle>New Brand</DialogTitle>
+
+        <DialogContent>
+          <TextField
+            autoFocus
+            fullWidth
+            margin="dense"
+            variant="outlined"
+            name="name"
+            label="Brand Name"
+            value={newBrandName}
+            onChange={(e) => setNewBrandName(e.target.value)}
+            sx={{ mt: 1 }}
+          />
+        </DialogContent>
+
+        <DialogActions>
+          <Button variant="outlined" onClick={addBrandModal.onFalse}>
+            Cancel
+          </Button>
+          <LoadingButton type="submit" variant="contained" loading={isCreating}>
+            Create
+          </LoadingButton>
+        </DialogActions>
+      </Dialog>
       {renderConfirmDialog()}
     </>
   );

@@ -1,6 +1,8 @@
+import { deleteCategories, getCategories, postCategories, putCategories } from '@/core/actions';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { type NewCategoryData } from '@/core/actions/items/categories';
 import { CategoriesResponse } from '@/core/types/api-response.type';
-import { getCategories } from '@/core/actions';
+import { toast } from 'src/components/snackbar';
 
 export const categoriesKeys = {
   all: (userCacheId?: string) => ['categories', userCacheId] as const,
@@ -18,13 +20,16 @@ export const useCreateCategory = () => {
   const queryClient = useQueryClient();
 
   const mutate = useMutation({
-    mutationFn: async () => {
-      return [];
-    },
+    mutationFn: (newCategory: NewCategoryData) => postCategories(newCategory),
     onSuccess: () => {
       queryClient.invalidateQueries({
         queryKey: categoriesKeys.all(),
       });
+      toast.success('Category created successfully!');
+    },
+    onError: (error) => {
+      console.error('Failed to create category:', error);
+      toast.error('Could not create the category. Please try again.');
     },
   });
 
@@ -35,9 +40,7 @@ export const useEditCategory = () => {
   const queryClient = useQueryClient();
 
   const mutate = useMutation({
-    mutationFn: async () => {
-      return [];
-    },
+    mutationFn: putCategories,
     onSuccess: () => {
       queryClient.invalidateQueries({
         queryKey: categoriesKeys.all(),
@@ -52,9 +55,7 @@ export const useDeleteCategory = () => {
   const queryClient = useQueryClient();
 
   const mutate = useMutation({
-    mutationFn: async () => {
-      return [];
-    },
+    mutationFn: deleteCategories,
     onSuccess: () => {
       queryClient.invalidateQueries({
         queryKey: categoriesKeys.all(),

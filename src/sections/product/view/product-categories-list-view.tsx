@@ -15,6 +15,14 @@ import Button from '@mui/material/Button';
 import Card from '@mui/material/Card';
 import Link from '@mui/material/Link';
 import Box from '@mui/material/Box';
+
+import Dialog from '@mui/material/Dialog';
+import TextField from '@mui/material/TextField';
+import DialogTitle from '@mui/material/DialogTitle';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import LoadingButton from '@mui/lab/LoadingButton';
+
 import {
   GridToolbarColumnsButton,
   GridToolbarFilterButton,
@@ -31,24 +39,23 @@ import type {
   GridSlotProps,
 } from '@mui/x-data-grid';
 
-import { useCategories } from '@/hooks/useCategories';
+import { useCategories, useCreateCategory } from '@/hooks/useCategories';
 import { categoriesColumns } from '../categories-columns';
 
 const HIDE_COLUMNS: GridColumnVisibilityModel = {};
-const HIDE_COLUMNS_TOGGLABLE: string[] = []; // sin columnas especiales que ocultar
+const HIDE_COLUMNS_TOGGLABLE: string[] = [];
 
 export function CategoriesListView() {
   const { data: categoriesData, isLoading: categoriesIsLoading } = useCategories();
 
+  const addCategoryModal = useBoolean();
+  const { mutate: createCategory, isPending: isCreating } = useCreateCategory();
+  const [newCategoryName, setNewCategoryName] = useState('');
+
   const confirmDialog = useBoolean();
 
-  // Normalizamos rows desde la API (ya trae `id`)
-  const rowsFromApi = useMemo(
-    () => categoriesData?.page?.content ?? [],
-    [categoriesData]
-  );
+  const rowsFromApi = useMemo(() => categoriesData?.page?.content ?? [], [categoriesData]);
 
-  // Estado local de la tabla (permite delete client-side)
   const [tableData, setTableData] = useState(rowsFromApi);
   const [selectedRowIds, setSelectedRowIds] = useState<GridRowSelectionModel>([]);
   const [filterButtonEl, setFilterButtonEl] = useState<HTMLButtonElement | null>(null);
@@ -60,6 +67,23 @@ export function CategoriesListView() {
     setTableData(rowsFromApi);
     setSelectedRowIds([]);
   }, [rowsFromApi]);
+
+  const handleCreateCategory = useCallback(async () => {
+    if (!newCategoryName.trim()) {
+      toast.error('Category name is required');
+      return;
+    }
+
+    createCategory(
+      { name: newCategoryName },
+      {
+        onSuccess: () => {
+          addCategoryModal.onFalse();
+          setNewCategoryName('');
+        },
+      }
+    );
+  }, [newCategoryName, createCategory, addCategoryModal]);
 
   const handleDeleteRows = useCallback(() => {
     if (!selectedRowIds.length) return;
@@ -122,10 +146,11 @@ export function CategoriesListView() {
           ]}
           action={
             <Button
-              component={RouterLink}
-              href={paths.dashboard.product.new}
+              // --- INICIO: Botón modificado para abrir el modal ---
               variant="contained"
               startIcon={<Iconify icon="mingcute:add-line" />}
+              onClick={addCategoryModal.onTrue}
+              // --- FIN: Botón modificado para abrir el modal ---
             >
               Add Category
             </Button>
@@ -169,6 +194,36 @@ export function CategoriesListView() {
         </Card>
       </DashboardContent>
 
+      <Dialog
+        open={addCategoryModal.value}
+        onClose={addCategoryModal.onFalse}
+        PaperProps={{ component: 'form', onSubmit: (e: React.FormEvent<HTMLFormElement>) => { e.preventDefault(); handleCreateCategory(); } }}
+      >
+        <DialogTitle>New Category</DialogTitle>
+
+        <DialogContent>
+          <TextField
+            autoFocus
+            fullWidth
+            margin="dense"
+            variant="outlined"
+            name="name"
+            label="Category Name"
+            value={newCategoryName}
+            onChange={(e) => setNewCategoryName(e.target.value)}
+            sx={{ mt: 1 }}
+          />
+        </DialogContent>
+
+        <DialogActions>
+          <Button variant="outlined" onClick={addCategoryModal.onFalse}>
+            Cancel
+          </Button>
+          <LoadingButton type="submit" variant="contained" loading={isCreating}>
+            Create
+          </LoadingButton>
+        </DialogActions>
+      </Dialog>
       {renderConfirmDialog()}
     </>
   );
