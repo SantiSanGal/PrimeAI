@@ -1,21 +1,28 @@
+import { useMutation, useQuery, useQueryClient, keepPreviousData } from '@tanstack/react-query';
 import { deleteBrands, getBrands, postBrands, putBrands } from '@/core/actions';
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import {  type NewBrandData } from '@/core/actions/items/brands';
-import { BrandsResponse } from '@/core/types/api-response.type';
+import { type BrandsResponse } from '@/core/types/api-response.type';
+import { type NewBrandData } from '@/core/actions/items/brands';
 import { toast } from 'src/components/snackbar';
+
+type UseBrandsParams = {
+  page: number;
+  size: number;
+};
 
 export const brandsKeys = {
   all: () => ['brands'] as const,
-  list: () => [...brandsKeys.all(), 'list'] as const,
+  list: (params: UseBrandsParams) => [...brandsKeys.all(), 'list', params] as const,
 };
 
-export const useBrands = () => {
+export const useBrands = ({ page, size }: UseBrandsParams) => {
+  const params = { page, size };
+
   return useQuery<BrandsResponse, Error>({
-    queryKey: brandsKeys.list(),
-    queryFn: getBrands,
+    queryKey: brandsKeys.list(params),
+    queryFn: () => getBrands(params),
+    placeholderData: keepPreviousData,
   });
 };
-
 
 export const useCreateBrand = () => {
   const queryClient = useQueryClient();

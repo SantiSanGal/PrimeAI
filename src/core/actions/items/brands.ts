@@ -1,9 +1,19 @@
-import { BrandsResponse } from '@/core/types/api-response.type';
+import { type BrandsResponse } from '@/core/types/api-response.type';
 import { primeaiApi } from 'src/api/primeai.api';
 import Parameters from '@/Parameters';
 
-export const getBrands = async (): Promise<BrandsResponse> => {
-  const { data } = await primeaiApi.get(Parameters.services.products.brands.list);
+type PaginationParams = {
+  page: number;
+  size: number;
+};
+
+export const getBrands = async ({ page, size }: PaginationParams): Promise<BrandsResponse> => {
+  const { data } = await primeaiApi.get(Parameters.services.products.brands.list, {
+    params: {
+      page,
+      size,
+    },
+  });
   return data;
 };
 

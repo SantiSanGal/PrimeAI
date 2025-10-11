@@ -46,7 +46,29 @@ const HIDE_COLUMNS: GridColumnVisibilityModel = {};
 const HIDE_COLUMNS_TOGGLABLE: string[] = [];
 
 export function BrandsListView() {
-  const { data: brandsData, isLoading: brandsIsLoading } = useBrands();
+  const [paginationModel, setPaginationModel] = useState({
+    page: 0,
+    pageSize: 10,
+  });
+
+  const { 
+    data: brandsData, 
+    isFetching,
+  } = useBrands({
+    page: paginationModel.page,
+    size: paginationModel.pageSize,
+  });
+
+  //Para evitar bucle de reinicio de paginacion
+  const [rowCount, setRowCount] = useState(0);
+
+  useEffect(() => {
+    setRowCount((prevRowCount) =>
+      brandsData?.page?.page?.totalElements !== undefined
+        ? brandsData.page.page.totalElements
+        : prevRowCount
+    );
+  }, [brandsData]);
 
   const addBrandModal = useBoolean();
   const { mutate: createBrand, isPending: isCreating } = useCreateBrand();
@@ -54,18 +76,12 @@ export function BrandsListView() {
 
   const confirmDialog = useBoolean();
 
-  const rowsFromApi = useMemo(() => brandsData?.page?.content ?? [], [brandsData]);
+ const rowsFromApi = useMemo(() => brandsData?.page?.content ?? [], [brandsData]);
 
-  const [tableData, setTableData] = useState(rowsFromApi);
   const [selectedRowIds, setSelectedRowIds] = useState<GridRowSelectionModel>([]);
   const [filterButtonEl, setFilterButtonEl] = useState<HTMLButtonElement | null>(null);
   const [columnVisibilityModel, setColumnVisibilityModel] =
     useState<GridColumnVisibilityModel>(HIDE_COLUMNS);
-
-  useEffect(() => {
-    setTableData(rowsFromApi);
-    setSelectedRowIds([]);
-  }, [rowsFromApi]);
 
   const handleCreateBrand = useCallback(async () => {
     if (!newBrandName.trim()) {
@@ -85,12 +101,8 @@ export function BrandsListView() {
   }, [newBrandName, createBrand, addBrandModal]);
 
   const handleDeleteRows = useCallback(() => {
-    if (!selectedRowIds.length) return;
-    const idSet = new Set(selectedRowIds as string[]);
-    const deleteRows = tableData.filter((row: any) => !idSet.has(row.id));
-    toast.success('Delete success!');
-    setTableData(deleteRows);
-  }, [selectedRowIds, tableData]);
+
+  }, []);
 
   const CustomToolbarCallback = useCallback(
     () => (
@@ -165,14 +177,18 @@ export function BrandsListView() {
           }}
         >
           <DataGrid
+            paginationMode="server"
+            rowCount={rowCount}
+            paginationModel={paginationModel}
+            onPaginationModelChange={setPaginationModel}
+            
             checkboxSelection
             disableRowSelectionOnClick
-            rows={tableData}
+            rows={rowsFromApi}
             columns={brandsColumns}
-            loading={brandsIsLoading}
+            loading={isFetching}
             getRowHeight={() => 'auto'}
-            pageSizeOptions={[5, 10, 20, { value: -1, label: 'All' }]}
-            initialState={{ pagination: { paginationModel: { pageSize: 10 } } }}
+            pageSizeOptions={[5, 10, 20]}
             onRowSelectionModelChange={(newSelectionModel) => setSelectedRowIds(newSelectionModel)}
             columnVisibilityModel={columnVisibilityModel}
             onColumnVisibilityModelChange={(newModel) => setColumnVisibilityModel(newModel)}

@@ -1,18 +1,27 @@
 import { deleteCategories, getCategories, postCategories, putCategories } from '@/core/actions';
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { useMutation, useQuery, useQueryClient, keepPreviousData } from '@tanstack/react-query';
+import { type CategoriesResponse } from '@/core/types/api-response.type';
 import { type NewCategoryData } from '@/core/actions/items/categories';
-import { CategoriesResponse } from '@/core/types/api-response.type';
 import { toast } from 'src/components/snackbar';
+
+type UseCategoriesParams = {
+  page: number;
+  size: number;
+};
 
 export const categoriesKeys = {
   all: (userCacheId?: string) => ['categories', userCacheId] as const,
-  list: (userCacheId?: string) => [...categoriesKeys.all(userCacheId), 'list'] as const,
+  list: (params: UseCategoriesParams, userCacheId?: string) =>
+    [...categoriesKeys.all(userCacheId), 'list', params] as const,
 };
 
-export const useCategories = () => {
+export const useCategories = ({ page, size }: UseCategoriesParams) => {
+  const params = { page, size };
+
   return useQuery<CategoriesResponse, Error>({
-    queryKey: categoriesKeys.list('categories'),
-    queryFn: getCategories,
+    queryKey: categoriesKeys.list(params, 'categories'),
+    queryFn: () => getCategories(params),
+    placeholderData: keepPreviousData,
   });
 };
 

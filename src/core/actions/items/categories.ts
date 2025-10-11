@@ -1,8 +1,18 @@
 import { primeaiApi } from 'src/api/primeai.api';
 import Parameters from '@/Parameters';
 
-export const getCategories = async () => {
-  const { data } = await primeaiApi.get(Parameters.services.products.categories.list);
+type PaginationParams = {
+  page: number;
+  size: number;
+};
+
+export const getCategories = async ({ page, size }: PaginationParams) => {
+  const { data } = await primeaiApi.get(Parameters.services.products.categories.list, {
+    params: {
+      page,
+      size,
+    },
+  });
   return data;
 };
 

@@ -1,4 +1,4 @@
-import { useState, useEffect, forwardRef, useCallback, useMemo } from 'react';
+import { useState, forwardRef, useCallback, useMemo, useEffect } from 'react';
 import { CustomBreadcrumbs } from 'src/components/custom-breadcrumbs';
 import { ConfirmDialog } from 'src/components/custom-dialog';
 import { EmptyContent } from 'src/components/empty-content';
@@ -31,6 +31,7 @@ import {
   GridToolbarExport,
   gridClasses,
   DataGrid,
+  // GridPaginationModel
 } from '@mui/x-data-grid';
 import type {
   GridColumnVisibilityModel,
@@ -46,17 +47,28 @@ const HIDE_COLUMNS: GridColumnVisibilityModel = {};
 const HIDE_COLUMNS_TOGGLABLE: string[] = [];
 
 export function CategoriesListView() {
-  const { data: categoriesData, isLoading: categoriesIsLoading } = useCategories();
+    const [paginationModel, setPaginationModel] = useState({
+    page: 0,
+    pageSize: 10,
+  });
+
+  const { 
+    data: categoriesData, 
+    isLoading: categoriesIsLoading,
+    isFetching,
+  } = useCategories({
+    page: paginationModel.page,
+    size: paginationModel.pageSize,
+  });
+
+    const [rowCount, setRowCount] = useState(0);
 
   const addCategoryModal = useBoolean();
   const { mutate: createCategory, isPending: isCreating } = useCreateCategory();
   const [newCategoryName, setNewCategoryName] = useState('');
-
   const confirmDialog = useBoolean();
 
   const rowsFromApi = useMemo(() => categoriesData?.page?.content ?? [], [categoriesData]);
-
-  const [tableData, setTableData] = useState(rowsFromApi);
   const [selectedRowIds, setSelectedRowIds] = useState<GridRowSelectionModel>([]);
   const [filterButtonEl, setFilterButtonEl] = useState<HTMLButtonElement | null>(null);
 
@@ -64,9 +76,12 @@ export function CategoriesListView() {
     useState<GridColumnVisibilityModel>(HIDE_COLUMNS);
 
   useEffect(() => {
-    setTableData(rowsFromApi);
-    setSelectedRowIds([]);
-  }, [rowsFromApi]);
+    setRowCount((prevRowCount) =>
+      categoriesData?.page?.page?.totalElements !== undefined
+        ? categoriesData.page.page.totalElements
+        : prevRowCount
+    );
+  }, [categoriesData]);
 
   const handleCreateCategory = useCallback(async () => {
     if (!newCategoryName.trim()) {
@@ -86,12 +101,8 @@ export function CategoriesListView() {
   }, [newCategoryName, createCategory, addCategoryModal]);
 
   const handleDeleteRows = useCallback(() => {
-    if (!selectedRowIds.length) return;
-    const idSet = new Set(selectedRowIds as string[]);
-    const deleteRows = tableData.filter((row: any) => !idSet.has(row.id));
-    toast.success('Delete success!');
-    setTableData(deleteRows);
-  }, [selectedRowIds, tableData]);
+
+  }, []);
 
   const CustomToolbarCallback = useCallback(
     () => (
@@ -146,11 +157,9 @@ export function CategoriesListView() {
           ]}
           action={
             <Button
-              // --- INICIO: Botón modificado para abrir el modal ---
               variant="contained"
               startIcon={<Iconify icon="mingcute:add-line" />}
               onClick={addCategoryModal.onTrue}
-              // --- FIN: Botón modificado para abrir el modal ---
             >
               Add Category
             </Button>
@@ -168,14 +177,17 @@ export function CategoriesListView() {
           }}
         >
           <DataGrid
+            paginationMode="server"
+            rowCount={rowCount}
+            paginationModel={paginationModel}
+            onPaginationModelChange={setPaginationModel}
             checkboxSelection
             disableRowSelectionOnClick
-            rows={tableData}
+            rows={rowsFromApi}
             columns={categoriesColumns}
-            loading={categoriesIsLoading}
+            loading={categoriesIsLoading || isFetching}
             getRowHeight={() => 'auto'}
-            pageSizeOptions={[5, 10, 20, { value: -1, label: 'All' }]}
-            initialState={{ pagination: { paginationModel: { pageSize: 10 } } }}
+            pageSizeOptions={[5, 10, 20]}
             onRowSelectionModelChange={(newSelectionModel) => setSelectedRowIds(newSelectionModel)}
             columnVisibilityModel={columnVisibilityModel}
             onColumnVisibilityModelChange={(newModel) => setColumnVisibilityModel(newModel)}
